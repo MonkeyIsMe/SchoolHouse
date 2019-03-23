@@ -125,7 +125,7 @@ function approve(uid){
 			function(data){
 				data = data.replace(/^\s*/, "").replace(/\s*$/, "");
 				if(data == "Success"){
-					alert("注册成功 ！！");
+					alert("该用户通过注册 ！！");
 					window.location.replace("hw_table_school_administrator_check.html");
 				}
 				else{
