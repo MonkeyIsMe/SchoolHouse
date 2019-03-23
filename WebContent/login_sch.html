@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xx区非一手房验证系统 - 登录</title>
+    <!-- <link rel="shortcut icon" href="favicon.ico"> -->
+    <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <script src="js/login.js"></script>
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+</head>
+
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+                <h1 class="logo-name" style="margin-bottom:150px"></h1>
+            </div>
+            <!-- <h3 style="font-family:STXihei,'Microsoft YaHei';">xx区非一手房验证系统 * 学校管理端</h3> -->
+            <h3>欢迎使用xx区非一手房验证系统</h3>
+            <p>学校管理端</p>
+            <form class="m-t" role="form" action="login_sch.html" method="POST">
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="账号" id="schacount" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="密码" id="schpwd" required>
+                </div>
+                <div class="form-group">
+                    <input type="text"  class="form-control" placeholder="验证码" id="sch_login_code" required>
+                    <img src="SendCode.action" id="code_img" onclick="resetCode()" style="float: left; width:80px; height:30px; margin-top: 5px; margin-bottom: 5px" onclick="">
+                    <small style="float: left; margin-top: 20px" >点击图片刷新验证码</small>
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b" onclick="sch_login()">登 录</button>
+                <p class="text-muted text-center"> <a href="forget_pwd.html"><small>忘记密码？</small></a> | <a href="register_sch.html"> 注册一个新账号</a>
+                </p>
+            </form>
+        </div>
+    </div>
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:18:23 GMT -->
+</html>

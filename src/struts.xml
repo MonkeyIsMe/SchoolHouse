@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+         "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+         "http://struts.apache.org/dtds/struts-2.3.dtd">
+<!-- struts为配置文件根元素 -->
+<struts>
+
+	<!-- Action必须放在指定的包名空间中 -->
+	<package name="json"  extends="json-default" namespace="/">
+		
+		<action name="QueryAllUser" class="com.csu.controller.UserInfoAction" method="QueryAllUser">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="QuerySchoolManager" class="com.csu.controller.UserInfoAction" method="QuerySchoolManager">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">ja</param>
+            </result>
+		</action>
+		
+		<action name="QueryByFlag" class="com.csu.controller.UserInfoAction" method="QueryByFlag">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">ja</param>
+            </result>
+		</action>
+		
+		<action name="RegisterUser" class="com.csu.controller.UserAction" method="RegisterUser">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="UpdateUser" class="com.csu.controller.UserAction" method="UpdateUser">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="DeleteUser" class="com.csu.controller.UserAction" method="DeleteUser">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="AddUser" class="com.csu.controller.UserAction" method="AddUser">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="AccountIsExit" class="com.csu.controller.UserAction" method="AccountIsExit">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json"></result>
+		</action>
+		
+		<action name="UserToSchool" class="com.csu.controller.UserAction" method="UserToSchool">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json"></result>
+		</action>
+		
+		<action name="SendCode" class="com.csu.controller.CodeAction" method="SendCode">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json"></result>
+		</action>
+		
+		<action name="Login" class="com.csu.controller.LoginAction" method="Login">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json"></result>
+		</action>
+		
+		<action name="Logout" class="com.csu.controller.LoginAction" method="Logout">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json"></result>
+		</action>
+		
+		<action name="ForgetPassword" class="com.csu.controller.ForgetPasswordAction" method="ForgetPassword">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="QueryAllSchool" class="com.csu.controller.SchoolInfoAction" method="QueryAllSchool">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="QueryAllArea" class="com.csu.controller.AreaInfoAction" method="QueryAllArea">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="AddSchool" class="com.csu.controller.SchoolAction" method="AddSchool">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="UpdateSchool" class="com.csu.controller.SchoolAction" method="UpdateSchool">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="DeleteSchool" class="com.csu.controller.SchoolAction" method="DeleteSchool">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="AreaIsExit" class="com.csu.controller.AreaAction" method="AreaIsExit">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="DeleteArea" class="com.csu.controller.AreaAction" method="DeleteArea">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="UpdateArea" class="com.csu.controller.AreaAction" method="UpdateArea">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="AddArea" class="com.csu.controller.AreaAction" method="AddArea">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+	</package>
+</struts>

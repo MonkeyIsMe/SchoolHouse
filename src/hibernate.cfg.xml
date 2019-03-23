@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+<session-factory>
+
+   <!-- #hibernate.dialect org.hibernate.dialect.MySQLDialect
+		#hibernate.dialect org.hibernate.dialect.MySQLInnoDBDialect
+		#hibernate.dialect org.hibernate.dialect.MySQLMyISAMDialect
+		#hibernate.connection.driver_class com.mysql.jdbc.Driver
+		#hibernate.connection.url jdbc:mysql:///test
+		#hibernate.connection.username gavin
+		#hibernate.connection.password
+	 -->
+
+
+
+<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+<property name="hibernate.connection.url">jdbc:mysql:///schoolhouse?autoReconnect=true&amp;autoReconnectForPools=true&amp;characterEncoding=UTF-8
+</property>
+<property name="hibernate.connection.username">root</property>
+<property name="hibernate.connection.password">421992850</property>
+<property name="current_session_context_class">thread</property>	
+<property name="connection.autoReconnect">true</property> 
+<property name="connection.autoReconnectForPools">true</property> 
+<property name="connection.is-connection-validation-required">true</property> 
+<property name="show_sql">true</property>
+
+		
+		<!-- 
+		## auto schema export  自动导出表结构. 自动建表
+		#hibernate.hbm2ddl.auto create		自动建表.每次框架运行都会创建新的表.以前表将会被覆盖,表数据会丢失.(开发环境中测试使用)
+		#hibernate.hbm2ddl.auto create-drop 自动建表.每次框架运行结束都会将所有表删除.(开发环境中测试使用)
+		#hibernate.hbm2ddl.auto update(推荐使用) 自动生成表.如果已经存在不会再生成.如果表有变动.自动更新表(不会删除任何数据).
+		#hibernate.hbm2ddl.auto validate	校验.不自动生成表.每次启动会校验数据库中表是否正确.校验失败.
+		 -->
+		 <property name="hibernate.current_session_context_class">thread</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+<mapping class="com.csu.model.User" />
+<mapping class="com.csu.model.Area" />
+<mapping class="com.csu.model.Building" />
+<mapping class="com.csu.model.School" />
+<mapping class="com.csu.model.Student" />
+<mapping class="com.csu.model.House" />
+</session-factory>
+
+
+
+</hibernate-configuration>

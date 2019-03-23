@@ -1,0 +1,87 @@
+.gray-bg{
+    background-color: #fff ;
+}
+.ibox-content{
+    height: 630px;
+}
+.ui-jqdialog{
+    width: 1500px !important;
+    height: auto !important;
+    left: 50px !important;
+    
+}
+#alertmod_table_list_2{
+    width: 20% !important;
+    margin-right: 43% !important;
+    margin-left: 37% !important;
+    top:200px !important;
+    height: auto !important;
+}
+.CaptionTD{
+    width: 200px !important;
+}
+.DataTD{
+    width: 200px !important;
+}
+.FormData{
+    float: left !important;
+    width: 37.5% !important;
+    margin-left: 12.5% !important;
+}
+#delmodtable_list_2{
+    width: 20% !important;
+    margin-right: 43% !important;
+    margin-left: 37% !important;
+    top:200px !important;
+}
+.mybutton{
+    margin-bottom: 10px;
+    margin-right: 5px;
+}
+.modal-dialog{
+    width: 1000px;
+}
+.del-modal-dialog{
+    top:250px;
+    width: 600px;
+}
+.modal-lable{
+    vertical-align: middle;
+    margin: 0px;
+    padding: 8px 0px;
+}
+.div-0{
+    margin-bottom: 10px: 
+    height:34px;
+}
+.div-1{
+    margin-bottom: 10px: 
+}
+.div-2{
+    height: 34px;
+    
+}
+#myEdit{
+    display: none;
+}
+.del-check{
+    margin: 0px auto;
+    padding: 0px 225px;
+}
+.del-cancel{
+    float: left;
+}
+
+.ibox-header{
+    padding-left: 20px;
+}
+.search-input{
+    margin:5px 0px; 
+    
+    width: 600px;
+    text-align: center;
+}
+.button-opt{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
