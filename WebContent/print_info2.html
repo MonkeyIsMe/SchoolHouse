@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        @media print {
+            html, body {
+            width: 210mm;
+            height: 297mm;
+            }
+        }
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body  onload="GetRequest()" > 
+ 
+    <div style="font-family:'KaiTi',楷体,'FangSong',仿宋; font-size:17pt; width: 210mm; margin-left: auto; margin-right: auto;">
+        <div id="result" style="width:195mm;margin-left: auto; margin-right: auto;"></div>
+    </div>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="js/plugins/peity/jquery.peity.min.js"></script>
+    <script >
+        function GetRequest() {
+            var url = location.search; //获取url中"?"符后的字串
+            if(url.indexOf("?") != -1) {
+                var str = url.substr(5);  //截掉?str=
+                document.getElementById('result').innerHTML = decodeURI(str);
+                window.print();
+                //setTimeout(re,3000);
+                if (window.ActiveXObject || "ActiveXObject" in window || navigator.userAgent.indexOf("Edge") > -1){
+                     alert("打印完毕，点击返回");
+                }
+                re();
+            }else{
+                window.location.href="hw_table_student_invalid.html"; 
+            }
+            
+            // var r=confirm("打印完毕");
+            //     if (r==true){
+            //         window.location.href="hw_table_student_invalid.html"; 
+            //     }
+            //     else{
+            //         window.location.href="hw_table_student_invalid.html"; 
+            //     }
+            
+        }
+        function re() {
+            window.location.href="hw_table_student_invalid.html"; 
+        }    
+    </script>
+</body>
+</html>

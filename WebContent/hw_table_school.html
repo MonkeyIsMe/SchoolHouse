@@ -41,13 +41,13 @@
                     <div class="ibox-content">
                         
                         <div class="button-opt col-sm-3">
-                            <button type="button" id="bt_add" class="btn btn-primary mybutton" data-toggle="modal" data-target="#add">
+                            <button type="button" id="bt_add" class="btn btn-primary mybutton" data-toggle="modal" data-target="">
                               添加
                             </button>                        
-                            <button type="button" id="bt_edit" class="btn btn-primary mybutton" data-toggle="modal" data-target="#edit">
+                            <button type="button" id="bt_edit" class="btn btn-primary mybutton" data-toggle="modal" data-target="">
                               修改
                             </button>
-                            <button type="button" id="bt_del" class="btn btn-primary mybutton" data-toggle="modal" data-target="#del">
+                            <button type="button" id="bt_del" class="btn btn-primary mybutton" data-toggle="modal" data-target="">
                               删除
                             </button>
                         </div>
@@ -60,189 +60,103 @@
             </div>
         </div>
     </div>
-<style type="text/css">
-	.mybutton{
-		margin-bottom: 10px;
-		margin-right: 5px;
-	}
-    .modal-dialog{
-        width: 1000px;
-    }
-    .del-modal-dialog{
-        top:250px;
-        width: 600px;
-    }
-    .modal-lable{
-        vertical-align: middle;
-        margin: 0px;
-        padding: 8px 0px;
-    }
-    .div-0{
-        margin-bottom: 10px: 
-        height:34px;
-    }
-    .div-1{
-        margin-bottom: 10px: 
-    }
-    .div-2{
-        height: 34px;
-        
-    }
-    #myEdit{
-        display: none;
-    }
-    .del-check{
-        margin: 0px auto;
-        padding: 0px 225px;
-    }
-    .del-cancel{
-        float: left;
-    }
-</style>
 
 
-<div class="modal fade mymodal" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">添加数据</h4>
-      </div>
-      <div class="modal-body">
-        <div class="form-group draggable ui-draggable">
-            <div class="div-0">
-                <div class="col-md-6 div-1">
-                    <div class="form-group div-2">
-                        <label class="col-sm-3 control-label modal-lable">学校名称：</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="schoolName" name="" class="form-control" placeholder="请输入文本">
+
+<div class="add-edit-modal">
+    <div class="modal fade mymodal" id="add-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">添加数据</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group draggable ui-draggable">
+                <div class="div-0">
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">学校名称：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="schoolName" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">学校地址：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="schooladdress" name="" class="form-control" placeholder="请输入文本">
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 div-1">
-                    <div class="form-group div-2">
-                        <label class="col-sm-3 control-label modal-lable">学校地址：</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="schooladdress" name="" class="form-control" placeholder="请输入文本">
+                <div class="div-0">
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">所属街道：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="schoolStreet" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">所属学区：</label>
+                            <div class="col-sm-9">
+                                <!-- <input type="text" id="Sdid" name="" class="form-control" placeholder="请输入文本"> -->
+                                <select id="area" class="form-control">
+                                
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="div-0">
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">法人代表：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="legalPerson" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">联系电话：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="schoolTel" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="div-0">
+                    <!-- <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">创建时间：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="createTime" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                           <!--  <label class="col-sm-3 control-label modal-lable">创建时间：</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="" class="form-control" placeholder="请输入文本">
+                            </div> -->
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="div-0">
-                <div class="col-md-6 div-1">
-                    <div class="form-group div-2">
-                        <label class="col-sm-3 control-label modal-lable">所属街道：</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="schoolStreet" name="" class="form-control" placeholder="请输入文本">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 div-1">
-                    <div class="form-group div-2">
-                        <label class="col-sm-3 control-label modal-lable">所属学区：</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="Sdid" name="" class="form-control" placeholder="请输入文本">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="div-0">
-                <div class="col-md-6 div-1">
-                    <div class="form-group div-2">
-                        <label class="col-sm-3 control-label modal-lable">法人代表：</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="legalPerson" name="" class="form-control" placeholder="请输入文本">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 div-1">
-                    <div class="form-group div-2">
-                        <label class="col-sm-3 control-label modal-lable">联系电话：</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="schoolTel" name="" class="form-control" placeholder="请输入文本">
-                        </div>
-                    </div>
-                </div>
-            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary" id="mySave">保存</button>
+            <button type="button" class="btn btn-primary" id="myEdit">修改</button>
+          </div>
         </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary" onclick="SaveSchool()">保存</button>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="modal fade mymodal" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">修改数据</h4>
-      </div>
-      <div class="modal-body">
-        <div class="form-group draggable ui-draggable">
-            <div class="div-0">
-                <div class="col-md-6 div-1">
-                    <div class="form-group div-2">
-                        <label class="col-sm-3 control-label modal-lable">学校名称：</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="update_schoolName" name="" class="form-control" placeholder="请输入文本">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 div-1">
-                    <div class="form-group div-2">
-                        <label class="col-sm-3 control-label modal-lable">学校地址：</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="update_schooladdress" name="" class="form-control" placeholder="请输入文本">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="div-0">
-                <div class="col-md-6 div-1">
-                    <div class="form-group div-2">
-                        <label class="col-sm-3 control-label modal-lable">所属街道：</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="update_schoolStreet" name="" class="form-control" placeholder="请输入文本">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 div-1">
-                    <div class="form-group div-2">
-                        <label class="col-sm-3 control-label modal-lable">所属学区：</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="update_Sdid" name="" class="form-control" placeholder="请输入文本">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="div-0">
-                <div class="col-md-6 div-1">
-                    <div class="form-group div-2">
-                        <label class="col-sm-3 control-label modal-lable">法人代表：</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="update_legalPerson" name="" class="form-control" placeholder="请输入文本">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 div-1">
-                    <div class="form-group div-2">
-                        <label class="col-sm-3 control-label modal-lable">联系电话：</label>
-                        <div class="col-sm-9">
-                            <input type="text" id="update_schoolTel" name="" class="form-control" placeholder="请输入文本">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary" id="UpdateSchool">保存</button>
-      </div>
-    </div>
-  </div>
 </div>
 
 <div class="del-modal">
@@ -268,15 +182,53 @@
     </div>
 </div>
 
+<div class="more-modal">
+    <div class="modal fade mymodal" id="mymore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog del-modal-dialog" role="document">
+        <div class="modal-content alert-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h3 class="modal-title" id="myModalLabel">此网页提示</h4>
+          </div>
+                <h2 class="myalert">请至多选择1项！</h2>
+          <div class="modal-footer">
+            <div class="alert-check">
+                <button type="button" class="btn btn-default alert-cancel" data-dismiss="modal">确定</button>
+                
+            </div>
+          </div>
+        <!-- </div> -->
+      </div>
+    </div>
+</div>
+
+<div class="less-modal">
+    <div class="modal fade mymodal" id="myless" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog del-modal-dialog" role="document">
+        <div class="modal-content alert-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h3 class="modal-title" id="myModalLabel">此网页提示</h3>
+          </div>    
+                <h2 class="myalert">请至少选择1项！</h2>
+          <div class="modal-footer">
+            <div class="alert-check">
+                <button type="button" class="btn btn-default alert-cancel" data-dismiss="modal">确定</button>
+                
+            </div>
+          </div>
+        <!-- </div> -->
+      </div>
+    </div>
+</div>
     <script src="js/jquery.min.js?v=2.1.4"></script>
     <script src="js/bootstrap.min.js?v=3.3.6"></script>
     <script src="js/plugins/peity/jquery.peity.min.js"></script>
     <script src="js/plugins/jqgrid/i18n/grid.locale-cnffe4.js?0820"></script>
     <script src="js/plugins/jqgrid/jquery.jqGrid.minffe4.js?0820"></script>
     <script src="js/content.min.js?v=1.0.0"></script>
-
+    <script src="js/SchoolManage.js"></script>
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
-	<script src="js/SchoolManage.js"></script>
 </body>
 
 </html>

@@ -20,7 +20,23 @@ function GetSchoolInfo(){
 	});
 }
 
-var hw_x = [];
+$(function(){
+	
+		$.post(
+			"QueryAllArea.action",
+			{
+			},
+			function(data){
+				var data = JSON.parse(data);
+				//console.log(1111111);
+			    //console.log(data)
+				for(var i = 0 ;i < data.length ; i++){
+					$("#area").append("<option value="+ data[i].areaId +">"+ data[i].areaName+"</option>");
+				}
+			}
+			);
+})
+
 $(document).ready(function() {
 			
 			GetSchoolInfo()
@@ -38,13 +54,6 @@ $(document).ready(function() {
 						rowList : [10],
 						multiselect : true,
 						celledit:true,
-						onSelectRow:function(id,stats){
-				        	if(stats){
-				                hw_x.push(id);
-				            }else{
-				            	hw_x.shift();
-				            }
-				        },
 						colNames : [ "序号", "学校名称", "学校地址", "所属街道", "所属学区",
 								"法人代表", "联系电话", "创建时间" ],
 						colModel : [ {
@@ -70,8 +79,8 @@ $(document).ready(function() {
 							editable : true,
 							width : 100
 						}, {
-							name : "areaId",
-							index : "areaId",
+							name : "areaName",
+							index : "areaName",
 							editable : true,
 							width : 80,
 							align : "left"
@@ -109,7 +118,7 @@ $(document).ready(function() {
 				edit : false,
 				add : false,
 				del : false,
-				search : true
+				search : false
 			}, {
 				height : 400,
 				reloadAfterSubmit : true
@@ -121,85 +130,93 @@ $(document).ready(function() {
 			
 			var hw_obj = $("#table_list_2").jqGrid("getRowData");
 			var hw_del = $("#table_list_2").jqGrid("getGridParam","selarrrow");
+			
+			$("#bt_add").click(function() {
+				$("#mySave").css("display","inline");
+			    $("#myEdit").css("display","none");
+			    $("#bt_add").attr("data-target","#add-edit");
+			    $("#mySave").click(function(){
+			    	SaveSchool();
+			    })
+			    
+				
+			});
+			
 			$("#bt_edit").click(function() {
+				//alert(hw_del.length)
 				$("#mySave").css("display","none");
 			    $("#myEdit").css("display","inline");
-			    if(hw_x.length==1){
-			        $("#update_legalPerson").val(hw_obj[hw_x[hw_x.length-1]-1].schoolIegalPerson);
-			        $("#update_schoolTel").val(hw_obj[hw_x[hw_x.length-1]-1].schoolPhone);
-			        $("#update_Sdid").val(hw_obj[hw_x[hw_x.length-1]-1].areaId);
-			        $("#update_schoolStreet").val(hw_obj[hw_x[hw_x.length-1]-1].schoolStreet);
-			        $("#update_schooladdress").val(hw_obj[hw_x[hw_x.length-1]-1].schoolAddress);
-			        $("#update_schoolName").val(hw_obj[hw_x[hw_x.length-1]-1].schoolName);
-			    	$("#UpdateSchool").click(function(){
-				        var sid = hw_obj[hw_x[hw_x.length-1]-1].schoolId;
-				        var update_legalPerson = $("#update_legalPerson").val();
-				        var update_schoolTel =$("#update_schoolTel").val();
-				        var update_Sdid = $("#update_Sdid").val();
-				        var update_schoolStreet = $("#update_schoolStreet").val();
-				        var update_schooladdress = $("#update_schooladdress").val();
-				        var update_schoolName = $("#update_schoolName").val();
-				        //alert(update_schooladdress + " + " +hw_obj[hw_x[hw_x.length-1]-1].schoolStreet);
-				    	if(update_schoolName == null || update_schoolName == "" || update_schooladdress == null || update_schooladdress == "" || update_schoolStreet == null ||
-				    			update_schoolStreet =="" || update_Sdid == null || update_Sdid == "" || update_legalPerson == null || 
-				    			update_legalPerson == "" || update_schoolTel ==null || update_schoolTel ==""){
-				    		alert("所有输入均为非空！！");
-				    	}
-				    	else{
-				    		$(function(){
-				    			$.post(
-				    					"AreaIsExit.action",
-				    					{
-				    						area_id:update_Sdid,
-				    					},
-				    					function(data){
-				    						data = data.replace(/^\s*/, "").replace(/\s*$/, "");
-				    						if(data == "Success"){
-				    							$(function(){
-				    								$.post(
-				    										"UpdateSchool.action",
-				    										{
-				    											school_name:update_schoolName,
-				    											school_address:update_schooladdress,
-				    											school_street:update_schoolStreet,
-				    											school_legal:update_legalPerson,
-				    											school_tele:update_schoolTel,
-				    											area_id:update_Sdid,
-				    											school_id:sid,
-				    										},
-				    										function(data){
-				    											data = data.replace(/^\s*/, "").replace(/\s*$/, "");
-				    											if(data == "Success"){
-				    												alert("更新成功！！");
-				    												window.location.replace("hw_table_school.html");
-				    											}
-				    										}
-				    										);
-				    								
-				    							});
-				    						}
-				    						else{
-				    							alert("学区不存在！！");
-				    							window.location.replace("hw_table_school.html");
-				    						}
-				    					}
-				    					);
-				    			
-				    		});
-				    	}
-			    	})  
-			    }else if(hw_x.length < 1){
+			    if(hw_del.length==1){
+			    	//alert(222);sssss
+			    	
+			    	$("#bt_edit").attr("data-target","#add-edit");
+			        $("#legalPerson").val(hw_obj[hw_del[0]-1].schoolIegalPerson);
+			        $("#schoolTel").val(hw_obj[hw_del[0]-1].schoolPhone);
+			        $("#Sdid").val(hw_obj[hw_del[0]-1].areaId);
+			        $("#schoolStreet").val(hw_obj[hw_del[0]-1].schoolStreet);
+			        $("#schooladdress").val(hw_obj[hw_del[0]-1].schoolAddress);
+			        $("#schoolName").val(hw_obj[hw_del[0]-1].schoolName); 
+			    }else if(hw_del.length < 1){
 			        alert("请至少选择1项！");
 			        $("#bt_edit").attr("data-target","");
 			    }else{
-			        alert("请只选择1项！");
+			        alert("请至多选择1项！");
+			        $("#bt_edit").attr("data-target","");
 			    }
 			});
 			
+	    	$("#myEdit").click(function(){
+	    		var op1 = $("#area option:selected");
+		        var sid = hw_obj[hw_del[0]-1].schoolId;
+		        var update_legalPerson = $("#legalPerson").val();
+		        var update_schoolTel =$("#schoolTel").val();
+		        var update_Sdid = op1.val();
+		        var update_schoolStreet = $("#schoolStreet").val();
+		        var update_schooladdress = $("#schooladdress").val();
+		        var update_schoolName = $("#schoolName").val();
+		        //alert(update_schooladdress + " + " +hw_obj[hw_del[0]-1].schoolStreet);
+		    	if(update_schoolName == null || update_schoolName == "" || update_schooladdress == null || update_schooladdress == "" || update_schoolStreet == null ||
+		    			update_schoolStreet =="" || update_Sdid == null || update_Sdid == ""){
+		    		alert("输入为非空！！");
+		    	}
+		    	else{
+		    		$(function(){
+						$.post(
+								"UpdateSchool.action",
+								{
+									school_name:update_schoolName,
+									school_address:update_schooladdress,
+									school_street:update_schoolStreet,
+									school_legal:update_legalPerson,
+									school_tele:update_schoolTel,
+									area_id:update_Sdid,
+									school_id:sid,
+								},
+								function(data){
+									data = data.replace(/^\s*/, "").replace(/\s*$/, "");
+									if(data == "Success"){
+										alert("更新成功！！");
+										window.location.replace("hw_table_school.html");
+										
+									}
+									else {
+										alert("更新失败！！");
+										window.location.replace("hw_table_school.html");
+									}
+								}
+								);
+		    			
+		    		});
+		    	}
+	    	}) 
+			
 		    $("#bt_del").click(function() {
 		        if(hw_del.length<1){
-		            alert("请至少选择1项！");
+			        alert("请至少选择1项！");
+			        $("#bt_edit").attr("data-target","");
 		        }else{
+		        	var success = 0; 
+		        	var fail = 0;
 		            // alert(obj_del);
 		            $("#bt_del").attr("data-target","#mydel");
 		            $("#myDelete").click(function(){
@@ -214,18 +231,22 @@ $(document).ready(function() {
 				    					function(data){
 				    						data = data.replace(/^\s*/, "").replace(/\s*$/, "");
 				    						if(data == "Success"){
-				    							alert("删除成功 ！！");
-				    							window.location.replace("hw_table_school_district.html");
+/*				    							alert("删除成功 ！！");
+				    							window.location.replace("hw_table_school.html");*/
+				    							success++;
 				    						}
 				    						else{
-				    							alert("删除失败 ！！");
-				    							window.location.replace("hw_table_school_district.html");
+				    							fail++;
+/*				    							alert("删除失败 ！！");
+				    							window.location.replace("hw_table_school.html");*/
 				    						}
 				    					}
 				    					);
 				    			
 				    		});
 				        }
+				        alert("删除成功：" +success + "项，删除失败：" + fail + "项" );
+				        window.location.replace("hw_table_school.html");
 		            });
 		        }
 
@@ -236,24 +257,25 @@ $(document).ready(function() {
 
 
 function SaveSchool(){
+	var op1 = $("#area option:selected");
 	var schoolName = $("#schoolName").val();
 	var schooladdress = $("#schooladdress").val();
 	var schoolStreet = $("#schoolStreet").val();
-	var Sdid = $("#Sdid").val();
+	var Sdid = op1.val();
 	var legalPerson = $("#legalPerson").val();
 	var schoolTel = $("#schoolTel").val();
+	
 	if(schoolName == null || schoolName == "" || schooladdress == null || schooladdress == "" || schoolStreet == null ||
-			schoolStreet =="" || Sdid == null || Sdid == "" || legalPerson == null || 
-			legalPerson == "" || schoolTel ==null || schoolTel ==""){
+			schoolStreet =="" || Sdid == null || Sdid == ""){
 		alert("所有输入均为非空！！");
 	}
 	else{
 		
 		$(function(){
 			$.post(
-					"AreaIsExit.action",
+					"SchoolAlready.action",
 					{
-						area_id:Sdid,
+						school_name:schoolName,
 					},
 					function(data){
 						data = data.replace(/^\s*/, "").replace(/\s*$/, "");
@@ -274,6 +296,7 @@ function SaveSchool(){
 											if(data == "Success"){
 												alert("添加成功！！");
 												window.location.replace("hw_table_school.html");
+												
 											}
 										}
 										);
@@ -281,7 +304,7 @@ function SaveSchool(){
 							});
 						}
 						else{
-							alert("学区不存在！！");
+							alert("学校已经存在！！");
 							window.location.replace("hw_table_school.html");
 						}
 					}

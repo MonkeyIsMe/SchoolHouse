@@ -4,10 +4,11 @@
 
 var mydata = [];
 
+
 function ApplyInfo(){
 	$.ajaxSettings.async = false;
 	$.post(
-			"QueryByFlag.action",
+			"QuerySchoolUserByFlag.action",
 			{
 				user_flag:"-1",
 			}, 
@@ -33,7 +34,7 @@ $(document).ready(function() {
 								shrinkToFit : true,
 								rowNum : 20,
 								rowList : [ 10, 20, 30 ],
-								colNames : [ "序号", "账号", "用户昵称", "电话号码", "密码",
+								colNames : [ "序号", "账号", "用户昵称", "电话号码",
 										"登录时间", "修改时间", "创建时间", "是否通过审核" ],
 								colModel : [ {
 									name : "userId",
@@ -58,14 +59,7 @@ $(document).ready(function() {
 									editable : true,
 									width : 80,
 									align : "left"
-								}, {
-									name : "userPassword",
-									index : "userPassword",
-									editable : true,
-									width : 80,
-									align : "left",
-									sorttype : "float"
-								}, {
+								},{
 									name : "userLoginTime",
 									index : "userLoginTime",
 									editable : true,
@@ -89,7 +83,7 @@ $(document).ready(function() {
 									editable : true,
 									width : 120,
 									align : "center",
-									formatter: function (value, grid, rows, state) { return "<button type='button' class=btn btn-primary' onclick='approve("+rows.userId+")'>通过</button>&nbsp;&nbsp;<button type='button' class=btn btn-primary' onclick='disapprove("+ rows.userId +")'>不通过</button>" } 
+									formatter: function (value, grid, rows, state) { return "<button type='button' class=btn btn-primary' style='background-color:#B8B8B8' title='通过' onclick='approve("+rows.userId+")'>通过</button>&nbsp;&nbsp;<button type='button' class=btn btn-primary' style='background-color:#B8B8B8'  onclick='disapprove("+ rows.userId +")'>不通过</button>" } 
 								} ],
 								pager : "#pager_list_2",
 								viewrecords : true,
@@ -138,8 +132,9 @@ function approve(uid){
 
 function disapprove(uid){
 	//alert(uid);
+	
 	$.post(
-			"DeleteUser.action",
+			"DeleteSchoolUser.action",
 			{
 				user_id:uid,
 			}, 

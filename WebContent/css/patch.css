@@ -34,6 +34,17 @@
     margin-left: 37% !important;
     top:200px !important;
 }
+.ui-jqgrid-hbox{
+    padding-right: 0px !important;
+}
+.ui-jqgrid-htable{
+    width: 100% !important;
+}
+.ui-jqgrid-btable{
+    width: 100% !important;
+}
+
+
 .mybutton{
     margin-bottom: 10px;
     margin-right: 5px;
@@ -43,7 +54,7 @@
 }
 .del-modal-dialog{
     top:250px;
-    width: 600px;
+    width: 400px;
 }
 .modal-lable{
     vertical-align: middle;
@@ -64,12 +75,16 @@
 #myEdit{
     display: none;
 }
+#myValid{
+    display: none;
+}
 .del-check{
     margin: 0px auto;
-    padding: 0px 225px;
+    /*padding: 0px 225px;*/
+    text-align: center;
 }
 .del-cancel{
-    float: left;
+    /*float: left;*/
 }
 
 .ibox-header{
@@ -84,4 +99,12 @@
 .button-opt{
     margin-top: 5px;
     margin-bottom: 5px;
+}
+.myalert{
+    text-align: center;
+    margin: 20px auto;
+}
+.alert-check{
+    margin: 0px auto;
+    text-align: center;
 }

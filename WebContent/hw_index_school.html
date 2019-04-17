@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>学校管理</title>
+
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="css/patch.css" rel="stylesheet">
+</head>
+
+    <style>
+        /* Additional style to fix warning dialog position */
+        .ui-jqdialog{
+            width: 1500px !important;
+            height: auto !important;
+            left: 50px !important;
+            
+        }
+        #alertmod_table_list_2{
+            width: 20% !important;
+            margin-right: 43% !important;
+            margin-left: 37% !important;
+            top:200px !important;
+            height: auto !important;
+        }
+        .CaptionTD{
+            width: 200px !important;
+        }
+        .DataTD{
+            width: 200px !important;
+        }
+        .FormData{
+            float: left !important;
+            width: 37.5% !important;
+            margin-left: 12.5% !important;
+        }
+        #delmodtable_list_2{
+            width: 20% !important;
+            margin-right: 43% !important;
+            margin-left: 37% !important;
+            top:200px !important;
+        }
+    </style>
+
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden;">
+  <div id="wrapper">
+        <!--左侧导航开始-->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="nav-close"><i class="fa fa-times-circle"></i>
+            </div>
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <!-- <span><img alt="image" class="img-circle" src="img/profile_small.jpg" /></span> -->
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear">
+                                <span class="text-muted text-xs block" id="name" style="font-size:14px">姓名：<b class="caret"></b></span>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li>
+                                	<a class="" id="person-info-edit" href="" data-toggle="modal" data-target="">修改个人资料</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                	<a class="" id="school_info" href="" data-toggle="modal" data-target="">所属学校信息</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a onclick="logout()">安全退出</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">H+
+                        </div>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="add_excel.html">
+                            <i class="fa fa-columns"></i>
+                            <span class="nav-label">学生信息验证</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="hw_table_student_valid.html">
+                            <i class="fa fa-columns"></i> 
+                            <span class="nav-label">通过验证学生信息</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="hw_table_student_invalid.html">
+                            <i class="fa fa-columns"></i> 
+                            <span class="nav-label">未通过验证学生信息</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="hw_table_student_all.html">
+                            <i class="fa fa-columns"></i> 
+                            <span class="nav-label">所有学生信息</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="hw_table_building.html">
+                            <i class="fa fa-columns"></i>
+                            <span class="nav-label">楼盘管理</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="hw_table_house.html">
+                            <i class="fa fa-columns"></i>
+                            <span class="nav-label">房屋管理</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+        <!--左侧导航结束-->
+        <!--右侧部分开始-->
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+
+            <div class="row content-tabs">
+                <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i>
+                </button>
+<!--                 <nav class="page-tabs J_menuTabs">
+                    <div class="page-tabs-content">
+                        <a href="javascript:;" class="active J_menuTab" data-id="index_v1.html">首页</a>
+                    </div>
+                </nav> -->
+                <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
+                </button>
+                <div class="btn-group roll-nav roll-right">
+                    <div class="dropdown J_tabClose" data-toggle="dropdown"><span class="caret"></span>
+
+                    </div>
+                </div>
+                <a onclick="logout()" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+            </div>
+            <div class="row J_mainContent" id="content-main">
+                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="hw_index_1.html?v=4.0" frameborder="0" data-id="index_v1.html" seamless></iframe>
+            </div>
+            <div class="footer" style="height: 100px">
+                <div class="" style="text-align: center;padding-top: 30px;">&copy; 2019-~ <a href="" target="_blank">xxx学校</a>
+                </div>
+            </div>
+        </div>
+        <!--右侧部分结束-->
+
+<div class="person-modal">
+    <div class="modal fade mymodal" id="person-info-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">修改个人信息</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group draggable ui-draggable">
+                <div class="div-0">
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">用户昵称：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="edit_schuserName" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="div-0">
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">密码：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="edit_schpwd" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">邮箱：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="edit_email" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="div-0">
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">电话号码：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="edit_schtel" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary" id="personEdit">修改</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+    </div>
+    
+    
+    <div class="school-modal">
+    <div class="modal fade mymodal" id="school-info-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">查看学校信息</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group draggable ui-draggable">
+                <div class="div-0">
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">学校名称：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="school_name" name="" disabled="disabled" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="div-0">
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">学校地址：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="school_address" name="" disabled="disabled" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">学校街道：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="school_street" name="" disabled="disabled" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="div-0">
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">法人代表：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="school_person" name="" disabled="disabled" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">联系电话：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="school_phone" name="" disabled="disabled" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">所属学区：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="school_area" name="" disabled="disabled" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">创建时间：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="school_time" name="" disabled="disabled" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+    </div>
+    
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="js/plugins/layer/layer.min.js"></script>
+    <script src="js/hplus.min.js?v=4.1.0"></script>
+    <script type="text/javascript" src="js/contabs.min.js"></script>
+    <script src="js/plugins/pace/pace.min.js"></script>
+    <script src="js/SchInfo.js"></script>
+</body>
+
+
+
+</html>

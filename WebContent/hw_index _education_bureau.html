@@ -14,12 +14,13 @@
     <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
     <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="css/patch.css" rel="stylesheet">
 </head>
 
 
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
-    <div id="wrapper">
+        <div id="wrapper">
         <!--左侧导航开始-->
         <nav class="navbar-default navbar-static-side" role="navigation">
             <div class="nav-close"><i class="fa fa-times-circle"></i>
@@ -28,29 +29,33 @@
                 <ul class="nav" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element">
-                            <span><img alt="image" class="img-circle" src="img/profile_small.jpg" /></span>
+                           <!--  <span><img alt="image" class="img-circle" src="img/profile_small.jpg" /></span> -->
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
-                               <span class="block m-t-xs"><strong class="font-bold">教育局管理员</strong></span>
-                                <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+                                <span class="text-muted text-xs block" id="name"  style="font-size:14px">姓名：<b class="caret"></b></span>
                                 </span>
                             </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a class="J_menuItem" href="form_avatar.html">修改头像</a>
+                                <li>
+                                	<a class="" id="person-info-edit" href="" data-toggle="modal" data-target="">修改个人资料</a>
                                 </li>
-                                <li><a class="J_menuItem" href="profile.html">个人资料</a>
-                                </li>
-                                <li><a class="J_menuItem" href="contacts.html">联系我们</a>
-                                </li>
-                                <li><a class="J_menuItem" href="mailbox.html">信箱</a>
-                                </li>
+<!--                                 <li class="divider"></li>
+                                <li>
+                                	<a class="" id="add_eduUser" href="" data-toggle="modal" data-target="">添加教育局管理员</a>
+                                </li> -->
                                 <li class="divider"></li>
-                                <li><a href="login.html">安全退出</a>
+                                <li><a onclick="logout()">安全退出</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="logo-element">H+
                         </div>
+                    </li>
+                     <li>
+                        <a class="J_menuItem" href="hw_table_school_district.html">
+                            <i class="fa fa-columns"></i> 
+                            <span class="nav-label">学区管理</span>
+                        </a>
                     </li>
                     <li>
                         <a class="J_menuItem" href="hw_table_school.html">
@@ -59,21 +64,21 @@
                         </a>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="hw_table_school_district.html">
-                            <i class="fa fa-columns"></i> 
-                            <span class="nav-label">学区管理</span>
-                        </a>
-                    </li>
-                    <li>
                         <a class="J_menuItem" href="hw_table_school_administrator_check.html">
-                            <i class="fa fa fa-bar-chart-o"></i>
+                            <i class="fa fa-columns"></i>
                             <span class="nav-label">管理员审核</span>
                         </a>
                     </li>
                     <li>
                         <a class="J_menuItem" href="hw_table_school_administrator.html">
-                            <i class="fa fa fa-bar-chart-o"></i>
+                            <i class="fa fa-columns"></i>
                             <span class="nav-label">管理员管理</span>
+                        </a>
+                    </li>
+					<li>
+                        <a class="J_menuItem" href="hw_table_building_check.html">
+                            <i class="fa fa-columns"></i>
+                            <span class="nav-label">楼盘审核</span>
                         </a>
                     </li>
 
@@ -88,28 +93,19 @@
             <div class="row content-tabs">
                 <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i>
                 </button>
-                <nav class="page-tabs J_menuTabs">
-                    <div class="page-tabs-content">
+<!--                 <nav class="page-tabs J_menuTabs">
+                    <div class="page-tabs-content" id="removessss">
                         <a href="javascript:;" class="active J_menuTab" data-id="index_v1.html">首页</a>
                     </div>
-                </nav>
-                <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
-                </button>
+                </nav> -->
+                <button class="roll-nav roll-right J_tabRight" ><i class="fa fa-forward"></i>
+                 </button>
                 <div class="btn-group roll-nav roll-right">
-                    <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span>
+                    <div class="dropdown J_tabClose" ><span class="caret"></span>
 
-                    </button>
-                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
-                        <li class="J_tabShowActive"><a>定位当前选项卡</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li class="J_tabCloseAll"><a>关闭全部选项卡</a>
-                        </li>
-                        <li class="J_tabCloseOther"><a>关闭其他选项卡</a>
-                        </li>
-                    </ul>
+                    </div>
                 </div>
-                <a href="login.html" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+                <a onclick="logout()" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
             </div>
             <div class="row J_mainContent" id="content-main">
                 <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="hw_index_1.html?v=4.0" frameborder="0" data-id="index_v1.html" seamless></iframe>
@@ -121,7 +117,96 @@
         </div>
         <!--右侧部分结束-->
 
-
+<div class="person-modal">
+    <div class="modal fade mymodal" id="person-info-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">修改个人信息</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group draggable ui-draggable">
+                <div class="div-0">
+   <!--                  <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">账号：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="eduacount" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">用户昵称：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="eidt_eduuserName" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">用户邮箱：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="eduemail" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="div-0">
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">密码：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="eidt_edupwd" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="div-0">
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">电话：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="eidt_edutele" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+<!--                     <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">登入时间：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="loginTime" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+<!--                 <div class="div-0">
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">创建时间：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="createTime" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                           <!--  <label class="col-sm-3 control-label modal-lable">创建时间：</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="" class="form-control" placeholder="请输入文本">
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary" id="personEdit">修改</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
     </div>
     <script src="js/jquery.min.js?v=2.1.4"></script>
     <script src="js/bootstrap.min.js?v=3.3.6"></script>
@@ -131,6 +216,8 @@
     <script src="js/hplus.min.js?v=4.1.0"></script>
     <script type="text/javascript" src="js/contabs.min.js"></script>
     <script src="js/plugins/pace/pace.min.js"></script>
+    <script src="js/EduInfo.js"></script>
+    
 </body>
 
 

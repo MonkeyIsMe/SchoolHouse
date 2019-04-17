@@ -16,18 +16,30 @@
 		#hibernate.connection.password
 	 -->
 
-
+<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+<property name="hibernate.c3p0.max_size">20</property>
+<property name="hibernate.c3p0.min_size">5</property>
+<property name="hibernate.c3p0.timeout">120</property>
+<property name="automaticTestTable">Test</property>
+<property name="hibernate.c3p0.max_statements">100</property>
+<property name="hibernate.c3p0.idle_test_period">120</property>
+<property name="hibernate.c3p0.acquire_increment">1</property>
+<property name="c3p0.testConnectionOnCheckout">true</property>
+<property name="c3p0.idleConnectionTestPeriod">18000</property>
+<property name="c3p0.maxIdleTime">25000</property>
+<property name="c3p0.idle_test_period">120</property>
 
 <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 <property name="hibernate.connection.url">jdbc:mysql:///schoolhouse?autoReconnect=true&amp;autoReconnectForPools=true&amp;characterEncoding=UTF-8
 </property>
 <property name="hibernate.connection.username">root</property>
-<property name="hibernate.connection.password">421992850</property>
+<property name="hibernate.connection.password">Huyutong123</property>
 <property name="current_session_context_class">thread</property>	
 <property name="connection.autoReconnect">true</property> 
 <property name="connection.autoReconnectForPools">true</property> 
 <property name="connection.is-connection-validation-required">true</property> 
-<property name="show_sql">true</property>
+<property name="hibernate.jdbc.batch_size">50</property> 
+<!-- <property name="show_sql">true</property> -->
 
 		
 		<!-- 
@@ -40,12 +52,14 @@
 		 <property name="hibernate.current_session_context_class">thread</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 
-<mapping class="com.csu.model.User" />
-<mapping class="com.csu.model.Area" />
-<mapping class="com.csu.model.Building" />
-<mapping class="com.csu.model.School" />
-<mapping class="com.csu.model.Student" />
-<mapping class="com.csu.model.House" />
+<mapping class="com.tongansz.model.User" />
+<mapping class="com.tongansz.model.SchoolUser" />
+<mapping class="com.tongansz.model.Area" />
+<mapping class="com.tongansz.model.Building" />
+<mapping class="com.tongansz.model.School" />
+<mapping class="com.tongansz.model.Student" />
+<mapping class="com.tongansz.model.TempStudent" />
+<mapping class="com.tongansz.model.House" />
 </session-factory>
 
 

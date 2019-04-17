@@ -1,129 +1,484 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC
-         "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
-         "http://struts.apache.org/dtds/struts-2.3.dtd">
+         "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+         "http://struts.apache.org/dtds/struts-2.5.dtd">
 <!-- struts为配置文件根元素 -->
 <struts>
-
+<constant name="struts.enable.DynamicMethodInvocation" value="true"/>
 	<!-- Action必须放在指定的包名空间中 -->
 	<package name="json"  extends="json-default" namespace="/">
 		
-		<action name="QueryAllUser" class="com.csu.controller.UserInfoAction" method="QueryAllUser">
+		<action name="QueryAllUser" class="com.tongansz.controller.UserInfoAction" method="QueryAllUser">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="success" type="json">
 			  <param name="root">arr</param>
             </result>
 		</action>
 		
-		<action name="QuerySchoolManager" class="com.csu.controller.UserInfoAction" method="QuerySchoolManager">
+		<action name="QuerySchoolManager" class="com.tongansz.controller.UserInfoAction" method="QuerySchoolManager">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="success" type="json">
 			  <param name="root">ja</param>
             </result>
 		</action>
 		
-		<action name="QueryByFlag" class="com.csu.controller.UserInfoAction" method="QueryByFlag">
+		<action name="QuerySchoolUserByFlag" class="com.tongansz.controller.SchoolUserInfoAction" method="QuerySchoolUserByFlag">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="success" type="json">
 			  <param name="root">ja</param>
             </result>
 		</action>
 		
-		<action name="RegisterUser" class="com.csu.controller.UserAction" method="RegisterUser">
+		
+		
+		<action name="RegisterSchoolUser" class="com.tongansz.controller.SchoolUserAction" method="RegisterSchoolUser">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="Success" type="json"></result>
 		</action>
 		
-		<action name="UpdateUser" class="com.csu.controller.UserAction" method="UpdateUser">
+		<action name="UpdateUser" class="com.tongansz.controller.UserAction" method="UpdateUser">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="Success" type="json"></result>
 		</action>
 		
-		<action name="DeleteUser" class="com.csu.controller.UserAction" method="DeleteUser">
+		<action name="UpdateUserInfo" class="com.tongansz.controller.UserAction" method="UpdateUserInfo">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="Success" type="json"></result>
 		</action>
 		
-		<action name="AddUser" class="com.csu.controller.UserAction" method="AddUser">
+		<action name="DeleteUser" class="com.tongansz.controller.UserAction" method="DeleteUser">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="Success" type="json"></result>
 		</action>
 		
-		<action name="AccountIsExit" class="com.csu.controller.UserAction" method="AccountIsExit">
-			<!-- 定义处理结果与视图资源之间的关系 -->
-			 <result name="success" type="json"></result>
-		</action>
-		
-		<action name="UserToSchool" class="com.csu.controller.UserAction" method="UserToSchool">
-			<!-- 定义处理结果与视图资源之间的关系 -->
-			 <result name="success" type="json"></result>
-		</action>
-		
-		<action name="SendCode" class="com.csu.controller.CodeAction" method="SendCode">
-			<!-- 定义处理结果与视图资源之间的关系 -->
-			 <result name="success" type="json"></result>
-		</action>
-		
-		<action name="Login" class="com.csu.controller.LoginAction" method="Login">
-			<!-- 定义处理结果与视图资源之间的关系 -->
-			 <result name="success" type="json"></result>
-		</action>
-		
-		<action name="Logout" class="com.csu.controller.LoginAction" method="Logout">
-			<!-- 定义处理结果与视图资源之间的关系 -->
-			 <result name="success" type="json"></result>
-		</action>
-		
-		<action name="ForgetPassword" class="com.csu.controller.ForgetPasswordAction" method="ForgetPassword">
+		<action name="AddUser" class="com.tongansz.controller.UserAction" method="AddUser">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="Success" type="json"></result>
 		</action>
 		
-		<action name="QueryAllSchool" class="com.csu.controller.SchoolInfoAction" method="QueryAllSchool">
+		<action name="UpdateSchoolUser" class="com.tongansz.controller.SchoolUserAction" method="UpdateSchoolUser">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="DeleteSchoolUser" class="com.tongansz.controller.SchoolUserAction" method="DeleteSchoolUser">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="AddSchoolUser" class="com.tongansz.controller.SchoolUserAction" method="AddSchoolUser">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="SchoolAccountIsExit" class="com.tongansz.controller.SchoolUserInfoAction" method="SchoolAccountIsExit">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json"></result>
+		</action>
+		
+		<action name="AccountIsExit" class="com.tongansz.controller.UserAction" method="AccountIsExit">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json"></result>
+		</action>
+		
+		<action name="UpdateSchoolUserInfo" class="com.tongansz.controller.SchoolUserAction" method="UpdateSchoolUserInfo">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json"></result>
+		</action>
+		
+		<action name="UserToSchool" class="com.tongansz.controller.UserAction" method="UserToSchool">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json"></result>
+		</action>
+		
+		<action name="SendCode" class="com.tongansz.controller.CodeAction" method="SendCode">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json"></result>
+		</action>
+		
+		<action name="Login" class="com.tongansz.controller.LoginAction" method="Login">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json"></result>
+		</action>
+		
+		<action name="SchLogin" class="com.tongansz.controller.LoginAction" method="SchLogin">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json"></result>
+		</action>
+		
+		<action name="Logout" class="com.tongansz.controller.LoginAction" method="Logout">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json"></result>
+		</action>
+		
+		<action name="GetSchoolUserInfo" class="com.tongansz.controller.LoginAction" method="GetSchoolUserInfo">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="success" type="json">
 			  <param name="root">arr</param>
             </result>
 		</action>
 		
-		<action name="QueryAllArea" class="com.csu.controller.AreaInfoAction" method="QueryAllArea">
+		<action name="SetSchoolUserInfo" class="com.tongansz.controller.LoginAction" method="SetSchoolUserInfo">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json"></result>
+		</action>
+		
+		<action name="GetUserInfo" class="com.tongansz.controller.LoginAction" method="GetUserInfo">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="success" type="json">
 			  <param name="root">arr</param>
             </result>
 		</action>
 		
-		<action name="AddSchool" class="com.csu.controller.SchoolAction" method="AddSchool">
+		<action name="SetUserInfo" class="com.tongansz.controller.LoginAction" method="SetUserInfo">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json"></result>
+		</action>
+		
+		
+		<action name="ForgetPassword" class="com.tongansz.controller.ForgetPasswordAction" method="ForgetPassword">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="Success" type="json"></result>
 		</action>
 		
-		<action name="UpdateSchool" class="com.csu.controller.SchoolAction" method="UpdateSchool">
+		<action name="UserForgetPassword" class="com.tongansz.controller.ForgetPasswordAction" method="UserForgetPassword">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="Success" type="json"></result>
 		</action>
 		
-		<action name="DeleteSchool" class="com.csu.controller.SchoolAction" method="DeleteSchool">
+		<action name="QueryAllSchool" class="com.tongansz.controller.SchoolInfoAction" method="QueryAllSchool">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="QueryBySchoolId" class="com.tongansz.controller.SchoolInfoAction" method="QueryBySchoolId">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">jo</param>
+            </result>
+		</action>
+		
+		<action name="QueryAllArea" class="com.tongansz.controller.AreaInfoAction" method="QueryAllArea">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="QueryAllStudent" class="com.tongansz.controller.StudentInfoAction" method="QueryAllStudent">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="QueryStudentBySchoolPageSize" class="com.tongansz.controller.StudentInfoAction" method="QueryStudentBySchoolPageSize">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="QueryStudentByPageSize" class="com.tongansz.controller.StudentInfoAction" method="QueryStudentByPageSize">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="QueryStudentBySchoolInValid" class="com.tongansz.controller.StudentInfoAction" method="QueryStudentBySchoolInValid">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="QueryStudentBySchool" class="com.tongansz.controller.StudentInfoAction" method="QueryStudentBySchool">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="QueryStudentBySchoolValid" class="com.tongansz.controller.StudentInfoAction" method="QueryStudentBySchoolValid">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="AddStudent" class="com.tongansz.controller.StudentAction" method="AddStudent">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="Success" type="json"></result>
 		</action>
 		
-		<action name="AreaIsExit" class="com.csu.controller.AreaAction" method="AreaIsExit">
+		<action name="AddInValidStudent" class="com.tongansz.controller.StudentAction" method="AddInValidStudent">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="Success" type="json"></result>
 		</action>
 		
-		<action name="DeleteArea" class="com.csu.controller.AreaAction" method="DeleteArea">
+		<action name="AddValidStudent" class="com.tongansz.controller.StudentAction" method="AddValidStudent">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="Success" type="json"></result>
 		</action>
 		
-		<action name="UpdateArea" class="com.csu.controller.AreaAction" method="UpdateArea">
+		<action name="DeleteStudent" class="com.tongansz.controller.StudentAction" method="DeleteStudent">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="Success" type="json"></result>
 		</action>
 		
-		<action name="AddArea" class="com.csu.controller.AreaAction" method="AddArea">
+		<action name="UpdateStudent" class="com.tongansz.controller.StudentAction" method="UpdateStudent">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		
+		
+		<action name="AddSchool" class="com.tongansz.controller.SchoolAction" method="AddSchool">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="SchoolAlready" class="com.tongansz.controller.SchoolAction" method="SchoolAlready">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="IsSchool" class="com.tongansz.controller.SchoolAction" method="IsSchool">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="UpdateSchool" class="com.tongansz.controller.SchoolAction" method="UpdateSchool">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="DeleteSchool" class="com.tongansz.controller.SchoolAction" method="DeleteSchool">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="AreaIsExit" class="com.tongansz.controller.AreaAction" method="AreaIsExit">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="DeleteArea" class="com.tongansz.controller.AreaAction" method="DeleteArea">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="AreaByName" class="com.tongansz.controller.AreaAction" method="AreaByName">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="UpdateArea" class="com.tongansz.controller.AreaAction" method="UpdateArea">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="AddArea" class="com.tongansz.controller.AreaAction" method="AddArea">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="AddBuilding" class="com.tongansz.controller.BuildingAction" method="AddBuilding">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="SetBuildingValid" class="com.tongansz.controller.BuildingAction" method="SetBuildingValid">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="UpdateBuilding" class="com.tongansz.controller.BuildingAction" method="UpdateBuilding">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="SubmitBuilding" class="com.tongansz.controller.BuildingAction" method="SubmitBuilding">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="UnSubmitBuilding" class="com.tongansz.controller.BuildingAction" method="UnSubmitBuilding">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="DeleteBuilding" class="com.tongansz.controller.BuildingAction" method="DeleteBuilding">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="BuildingIsExit" class="com.tongansz.controller.BuildingAction" method="BuildingIsExit">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="BuildingIsAlready" class="com.tongansz.controller.BuildingAction" method="BuildingIsAlready">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="QueryAllBuilding" class="com.tongansz.controller.BuildingInfoAction" method="QueryAllBuilding">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="QueryBuildingByAreaId" class="com.tongansz.controller.BuildingInfoAction" method="QueryBuildingByAreaId">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="QueryBuildingBySchoolIdFlag" class="com.tongansz.controller.BuildingInfoAction" method="QueryBuildingBySchoolIdFlag">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="QueryBuildingBySchoolId" class="com.tongansz.controller.BuildingInfoAction" method="QueryBuildingBySchoolId">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="QueryBuildingInvaild" class="com.tongansz.controller.BuildingInfoAction" method="QueryBuildingInvaild">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="QueryBuildingByFlag" class="com.tongansz.controller.BuildingInfoAction" method="QueryBuildingByFlag">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="DeteleHouse" class="com.tongansz.controller.HouseAction" method="DeteleHouse">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="HouseIsExit" class="com.tongansz.controller.HouseAction" method="HouseIsExit">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="UpdateHouse" class="com.tongansz.controller.HouseAction" method="UpdateHouse">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="AddHouse" class="com.tongansz.controller.HouseAction" method="AddHouse">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="QueryAllHouse" class="com.tongansz.controller.HouseInfoAction" method="QueryAllHouse">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="QueryHouseByBuildingId" class="com.tongansz.controller.HouseInfoAction" method="QueryHouseByBuildingId">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">ja</param>
+            </result>
+		</action>
+		
+		<action name="QueryHouseBySchoolId" class="com.tongansz.controller.HouseInfoAction" method="QueryHouseBySchoolId">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="AddStudentFromExcel" class="com.tongansz.controller.ReadExcelAction" method="AddStudentFromExcel">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="AddStudentFromExcelValid" class="com.tongansz.controller.ReadExcelAction" method="AddStudentFromExcelValid">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		
+		<action name="QueryAllTempStudent" class="com.tongansz.controller.TempStudentInfoAction" method="QueryAllTempStudent">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="QueryTempStudentBySchoolInValid" class="com.tongansz.controller.TempStudentInfoAction" method="QueryTempStudentBySchoolInValid">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="QueryTempStudentBySchool" class="com.tongansz.controller.TempStudentInfoAction" method="QueryTempStudentBySchool">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="QueryTempStudentBySchoolValid" class="com.tongansz.controller.TempStudentInfoAction" method="QueryTempStudentBySchoolValid">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="AddTempStudent" class="com.tongansz.controller.TempStudentAction" method="AddTempStudent">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="TempToStudent" class="com.tongansz.controller.TempStudentAction" method="TempToStudent">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="AddInValidTempStudent" class="com.tongansz.controller.TempStudentAction" method="AddInValidTempStudent">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="AddValidTempStudent" class="com.tongansz.controller.TempStudentAction" method="AddValidTempStudent">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="DeleteTempStudent" class="com.tongansz.controller.TempStudentAction" method="DeleteTempStudent">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="UpdateTempStudent" class="com.tongansz.controller.TempStudentAction" method="UpdateTempStudent">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="DeleteAllTempStudent" class="com.tongansz.controller.TempStudentAction" method="DeleteAllTempStudent">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="Success" type="json"></result>
 		</action>

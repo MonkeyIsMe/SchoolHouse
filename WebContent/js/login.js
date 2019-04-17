@@ -20,35 +20,42 @@ function sch_login(){
 	}
 	else{
 		$.post(
-				"Login.action",
+				"SchLogin.action",
 				{
 					user_account:account,
 					user_password:password,
-					uflag:0,
 					code:code,
 				},
 				function(data){
 					data = data.replace(/^\s*/, "").replace(/\s*$/, "");
 					console.log(data);
-					if(data == "JYJ"){
-						//alert(111);
+					if(data == "Success"){
+						console.log(data);
+						
+						$.post(
+								"DeleteAllTempStudent.action",
+								{
+									
+								}, 
+								function(data) {
+							}
+						);
+						
 						//Cookies.set("user_phone", account, {expires: 7});
-						window.location.replace("test.html")
-					}
-					else if(data == "XX"){
-						window.location.replace("test.html")
+						window.location.replace("hw_index_school.html")
 					}
 					else if(data == "WrongAnswer"){
-						alert("密码错误");
 						resetCode();
+						alert("密码错误");
+						
 					}
 					else if(data=="NoUser"){
-						alert("账号不存在");
 						resetCode();
+						alert("账号不存在");
 					}
 					else{
-						alert("验证码错误");
 						resetCode();
+						alert("验证码错误");
 					}
 				}
 				);
@@ -78,31 +85,27 @@ function edu_login(){
 				{
 					user_account:account,
 					user_password:password,
-					uflag:0,
 					code:code,
 				},
 				function(data){
 					data = data.replace(/^\s*/, "").replace(/\s*$/, "");
 					console.log(data);
-					if(data == "JYJ"){
+					if(data == "Success"){
 						//alert(111);
 						//Cookies.set("user_phone", account, {expires: 7});
-						window.location.replace("test.html")
-					}
-					else if(data == "XX"){
-						window.location.replace("test.html")
+						window.location.replace("hw_index _education_bureau.html")
 					}
 					else if(data == "WrongAnswer"){
-						alert("密码错误");
 						resetCode();
+						alert("密码错误");
 					}
 					else if(data=="NoUser"){
-						alert("账号不存在");
 						resetCode();
+						alert("账号不存在");
 					}
 					else{
-						alert("验证码错误");
 						resetCode();
+						alert("验证码错误");
 					}
 				}
 				);
