@@ -1,6 +1,13 @@
 /**
  * 
  */
+function EduAgree(){
+	edu_login();
+}
+
+function SchAgree(){
+	sch_login();
+}
 
 function sch_login(){
 	var account = $("#schacount").val();
@@ -19,46 +26,50 @@ function sch_login(){
 		alert("验证码不能为空!");
 	}
 	else{
-		$.post(
-				"SchLogin.action",
-				{
-					user_account:account,
-					user_password:password,
-					code:code,
-				},
-				function(data){
-					data = data.replace(/^\s*/, "").replace(/\s*$/, "");
-					console.log(data);
-					if(data == "Success"){
+		//alert(1);
+		$("#sch_agree").attr("data-target","#add-edit");
+		$("#SchAgree").click(function(){
+			//alert(1111);
+			$.post(
+					"SchLogin.action",
+					{
+						user_account:account,
+						user_password:password,
+						code:code,
+					},
+					function(data){
+						data = data.replace(/^\s*/, "").replace(/\s*$/, "");
 						console.log(data);
-						
-						$.post(
-								"DeleteAllTempStudent.action",
-								{
-									
-								}, 
-								function(data) {
-							}
-						);
-						
-						//Cookies.set("user_phone", account, {expires: 7});
-						window.location.replace("hw_index_school.html")
+						if(data == "Success"){
+							window.location.replace("hw_index_school.html");
+						}
+						else if(data == "WrongAnswer"){
+							$("#edu_agree").attr("data-target","");
+							resetCode();
+							alert("密码错误");
+							window.location.replace("login_sch.html");
+							
+						}
+						else if(data=="NoUser"){
+							$("#edu_agree").attr("data-target","");
+							resetCode();
+							alert("账号不存在");
+							window.location.replace("login_sch.html");
+						}
+						else{
+							$("#edu_agree").attr("data-target","");
+							resetCode();
+							alert("验证码错误");
+							window.location.replace("login_sch.html");
+						}
 					}
-					else if(data == "WrongAnswer"){
-						resetCode();
-						alert("密码错误");
-						
-					}
-					else if(data=="NoUser"){
-						resetCode();
-						alert("账号不存在");
-					}
-					else{
-						resetCode();
-						alert("验证码错误");
-					}
-				}
-				);
+					);
+		})
+		
+		$("#SchDismiss").click(function(){
+			resetCode();
+		})
+
 	}
 }
 
@@ -80,35 +91,49 @@ function edu_login(){
 		alert("验证码不能为空!");
 	}
 	else{
-		$.post(
-				"Login.action",
-				{
-					user_account:account,
-					user_password:password,
-					code:code,
-				},
-				function(data){
-					data = data.replace(/^\s*/, "").replace(/\s*$/, "");
-					console.log(data);
-					if(data == "Success"){
-						//alert(111);
-						//Cookies.set("user_phone", account, {expires: 7});
-						window.location.replace("hw_index _education_bureau.html")
+		
+		$("#edu_agree").attr("data-target","#add-edit");
+		
+		$("#EduAgree").click(function(){
+			$.post(
+					"Login.action",
+					{
+						user_account:account,
+						user_password:password,
+						code:code,
+					},
+					function(data){
+						data = data.replace(/^\s*/, "").replace(/\s*$/, "");
+						console.log(data);
+						if(data == "Success"){
+							window.location.replace("hw_index _education_bureau.html")
+						}
+						else if(data == "WrongAnswer"){
+							resetCode();
+							$("#edu_agree").attr("data-target","");
+							alert("密码错误");
+							window.location.replace("login_edu.html");
+						}
+						else if(data=="NoUser"){
+							resetCode();
+							$("#edu_agree").attr("data-target","");
+							alert("账号不存在");
+							window.location.replace("login_edu.html");
+						}
+						else{
+							resetCode();
+							$("#edu_agree").attr("data-target","");
+							alert("验证码错误");
+							window.location.replace("login_edu.html");
+						}
 					}
-					else if(data == "WrongAnswer"){
-						resetCode();
-						alert("密码错误");
-					}
-					else if(data=="NoUser"){
-						resetCode();
-						alert("账号不存在");
-					}
-					else{
-						resetCode();
-						alert("验证码错误");
-					}
-				}
-				);
+					);
+		})
+		
+		$("#EduDismiss").click(function(){
+			resetCode();
+		})
+
 	}
 }
 

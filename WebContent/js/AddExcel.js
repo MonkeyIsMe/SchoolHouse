@@ -49,30 +49,49 @@ $(document).ready(function(){
 
 
 $("#mySave").click(function() {
-    excel_num += 1;
-    if(flag == 0){
-        html += '<tr><th>#</th><th>学生姓名</th><th>学生身份证号码</th><th>父亲姓名</th><th>母亲姓名</th><th>业主姓名</th><th>业主身份证</th><th>与业主关系</th><th>房产证号</th><th>房屋预告登记号</th><th>所属楼盘</th><th>楼号</th><th>房号</th><th>所属学校</th><th>学生联系电话</th><th>使用的日期</th><th>毕业小学</th></tr>';
-        html += "<tr><td>"+excel_num+"</td><td>"+$("#studentName").val()+"</td><td>"+$("#identityId").val()+"</td><td>"+$("#farther").val()+"</td><td>"+$("#mother").val()+"</td><td>"+$("#houseOwner").val()+"</td><td>"+$("#houseOwnerId").val()+"</td><td>"+$("#relation").val()+"</td><td>"+$("#houseCard").val()+"</td><td>"+$("#housepreCard").val()+"</td><td>"+$("#studentbuildId").val()+"</td><td>"+
-            $("#studentbuildNum").val()+"</td><td>"+$("#studenthomeId").val()+"</td><td>"+$("#studentSchool").val()+"</td><td>"+$("#studentTel").val()+"</td><td>"+$("#useTime").val()+"</td><td>"+$("#privateSchool").val()+"</td></tr></table>";
+	
+	var studentName = $("#studentName").val();
+	var identityId = $("#identityId").val();
+	var houseOwner = $("#houseOwner").val();
+	var houseOwnerId = $("#houseOwnerId").val();
+	var relation = $("#relation").val();
+	var usetime = $("#useTime").val();
+	var studentbuildNum = $("#studentbuildNum").val();
+	
+	if(studentName == "" || studentName == null || identityId == null || identityId =="" ||	houseOwner == "" || houseOwner == null || 	houseOwnerId == null || houseOwnerId =="" 
+		|| relation == null || relation =="" || studentbuildNum == "" || studentbuildNum == null
+		||  usetime == null || usetime == ""
+	){
+		alert("有必填选项未填写！");
+	}
+	else{
+	    excel_num += 1;
+	    if(flag == 0){
+	        html += '<tr><th>#</th><th>学生姓名</th><th>学生身份证号码</th><th>父亲姓名</th><th>母亲姓名</th><th>业主姓名</th><th>业主身份证</th><th>与业主关系</th><th>房产证号</th><th>房屋预告登记号</th><th>所属楼盘</th><th>地址</th><th>所属学校</th><th>学生联系电话</th><th>使用的日期</th><th>毕业小学</th></tr>';
+	        html += "<tr><td>"+excel_num+"</td><td>"+$("#studentName").val()+"</td><td>"+$("#identityId").val()+"</td><td>"+$("#farther").val()+"</td><td>"+$("#mother").val()+"</td><td>"+$("#houseOwner").val()+"</td><td>"+$("#houseOwnerId").val()+"</td><td>"+$("#relation").val()+"</td><td>"+$("#houseCard").val()+"</td><td>"+$("#housepreCard").val()+"</td><td>"+$("#studentbuildId").val()+"</td><td>"+
+	            $("#studentbuildNum").val()+"</td><td>"+SchoolName+"</td><td>"+$("#studentTel").val()+"</td><td>"+$("#useTime").val()+"</td><td>"+$("#privateSchool").val()+"</td></tr></table>";
 
-        stu_str = '[{"学生姓名":"'+$("#studentName").val()+'","学生身份证号码":"'+$("#identityId").val()+'","父亲姓名":"'+$("#farther").val()+'","母亲姓名":"'+$("#mother").val()+'","业主姓名":"'+$("#houseOwner").val()+'","业主身份证":"'+$("#houseOwnerId").val()+'","与业主关系":"'+$("#relation").val()+
-        '","房产证号":"'+$("#houseCard").val()+'","房屋预告登记号":"'+$("#housepreCard").val()+'","所属楼盘":"'+$("#studentbuildId").val()+'","楼号":"'+$("#studentbuildNum").val()+'","房号":"'+$("#studenthomeId").val()+'","所属学校":"'+$("#studentSchool").val()+'","学生联系电话":"'+$("#studentTel").val()+'","使用的日期":"'+$("#useTime").val()+'","毕业小学":"'+$("#privateSchool").val()+'"}]';    
-        //console.log(stu_str);
-    }else if(flag == 1) {
-        // 去掉后面的</table>
-        html = html.substring(0,html.length-8);
-        html += "<tr><td>"+excel_num+"</td><td>"+$("#studentName").val()+"</td><td>"+$("#identityId").val()+"</td><td>"+$("#farther").val()+"</td><td>"+$("#mother").val()+"</td><td>"+$("#houseOwner").val()+"</td><td>"+$("#houseOwnerId").val()+"</td><td>"+$("#relation").val()+"</td><td>"+$("#houseCard").val()+"</td><td>"+$("#housepreCard").val()+"</td><td>"+$("#studentbuildId").val()+"</td><td>"+
-            $("#studentbuildNum").val()+"</td><td>"+$("#studenthomeId").val()+"</td><td>"+$("#studentSchool").val()+"</td><td>"+$("#studentTel").val()+"</td><td>"+$("#useTime").val()+"</td><td>"+$("#privateSchool").val()+"</td></tr></table>";
-        
-        stu_str = stu_str.substring(0, stu_str.length-1);
-        stu_str += ',{"学生姓名":"'+$("#studentName").val()+'","学生身份证号码":"'+$("#identityId").val()+'","父亲姓名":"'+$("#farther").val()+'","母亲姓名":"'+$("#mother").val()+'","业主姓名":"'+$("#houseOwner").val()+'","业主身份证":"'+$("#houseOwnerId").val()+'","与业主关系":"'+$("#relation").val()+
-        '","房产证号":"'+$("#houseCard").val()+'","房屋预告登记号":"'+$("#housepreCard").val()+'","所属楼盘":"'+$("#studentbuildId").val()+'","楼号":"'+$("#studentbuildNum").val()+'","房号":"'+$("#studenthomeId").val()+'","所属学校":"'+$("#studentSchool").val()+'","学生联系电话":"'+$("#studentTel").val()+'","使用的日期":"'+$("#useTime").val()+'","毕业小学":"'+$("#privateSchool").val()+'"}]';    
-        //console.log(stu_str);
-    };
-    flag = 1;
-    document.getElementById('result').innerHTML = html;
-    //$("#add-edit-modal").css("display","none");
-    $('#add-modal').modal('hide');
+	        stu_str = '[{"学生姓名":"'+$("#studentName").val()+'","学生身份证号码":"'+$("#identityId").val()+'","父亲姓名":"'+$("#farther").val()+'","母亲姓名":"'+$("#mother").val()+'","业主姓名":"'+$("#houseOwner").val()+'","业主身份证":"'+$("#houseOwnerId").val()+'","与业主关系":"'+$("#relation").val()+
+	        '","房产证号":"'+$("#houseCard").val()+'","房屋预告登记号":"'+$("#housepreCard").val()+'","所属楼盘":"'+$("#studentbuildId").val()+'","地址":"'+$("#studentbuildNum").val()+'","所属学校":"'+$("#studentSchool").val()+'","学生联系电话":"'+$("#studentTel").val()+'","使用的日期":"'+$("#useTime").val()+'","毕业小学":"'+$("#privateSchool").val()+'"}]';    
+	        //console.log(stu_str);
+	    }else if(flag == 1) {
+	        // 去掉后面的</table>
+	        html = html.substring(0,html.length-8);
+	        html += "<tr><td>"+excel_num+"</td><td>"+$("#studentName").val()+"</td><td>"+$("#identityId").val()+"</td><td>"+$("#farther").val()+"</td><td>"+$("#mother").val()+"</td><td>"+$("#houseOwner").val()+"</td><td>"+$("#houseOwnerId").val()+"</td><td>"+$("#relation").val()+"</td><td>"+$("#houseCard").val()+"</td><td>"+$("#housepreCard").val()+"</td><td>"+$("#studentbuildId").val()+"</td><td>"+
+	            $("#studentbuildNum").val()+"</td><td>"+"</td><td>"+SchoolName+"</td><td>"+$("#studentTel").val()+"</td><td>"+$("#useTime").val()+"</td><td>"+$("#privateSchool").val()+"</td></tr></table>";
+	        
+	        stu_str = stu_str.substring(0, stu_str.length-1);
+	        stu_str += ',{"学生姓名":"'+$("#studentName").val()+'","学生身份证号码":"'+$("#identityId").val()+'","父亲姓名":"'+$("#farther").val()+'","母亲姓名":"'+$("#mother").val()+'","业主姓名":"'+$("#houseOwner").val()+'","业主身份证":"'+$("#houseOwnerId").val()+'","与业主关系":"'+$("#relation").val()+
+	        '","房产证号":"'+$("#houseCard").val()+'","房屋预告登记号":"'+$("#housepreCard").val()+'","所属楼盘":"'+$("#studentbuildId").val()+'","地址":"'+$("#studentbuildNum").val()+'","所属学校":"'+SchoolName+'","学生联系电话":"'+$("#studentTel").val()+'","使用的日期":"'+$("#useTime").val()+'","毕业小学":"'+$("#privateSchool").val()+'"}]';    
+	        //console.log(stu_str);
+	    };
+	    flag = 1;
+	    document.getElementById('result').innerHTML = html;
+	    //$("#add-edit-modal").css("display","none");
+	    $('#add-modal').modal('hide');
+	}
+	
+
 });
 function selectFile() {
     $("#file").click();
@@ -111,93 +130,61 @@ function readWorkbook(workbook) {
 }
 
 $("#bt_in").click(function(){
-	console.log(stu_str);
-	$.post(
-			"DeleteAllTempStudent.action",
-			{
-				
-			}, 
-			function(data) {
-		}
-	);
+
 	
+	if(stu_str == null || stu_str == ""){
+		alert("数据非法！");
+	}
+	else{
+		stu_str = stu_str.replace(/[\r\n]/g,"");
+		stu_str = stu_str.replace(/\s+/g,"");
+		$.post(
+				"AddStudentFromExcel.action",
+				{
+					student_info:stu_str,
+					school_name:SchoolName,
+					area_id:areaid,
+				}, 
+				function(data) {
+	   				var data = JSON.parse(data);
+					//alert("总共 :" + data.all +"项" + "  ,因学校不匹配导入失败:" + (data.all - data.school) + "项" + "  ,因楼盘不匹配，导入失败 ：" + data.bcnt+"项")
+					if(data.school != 0 && data.building != 0  && data.repeat != 0){
+						alert( "因学校不匹配导入失败:" + data.school  + "  ,因地址不匹配，导入失败 ：" + data.building+ "  ,因重复信息，导入失败 ：" + data.repeat );
+						window.location.replace("hw_table_student_invalid.html");
+					}
+					else if(data.school != 0 && data.repeat != 0){
+						alert( "因学校不匹配导入失败:" + data.school  +"  ,因重复信息，导入失败 ：" + data.repeat);
+						window.location.replace("hw_table_student_invalid.html");
+					}
+					else if(data.repeat != 0 && data.building != 0){
+						alert("因地址不匹配，导入失败 ：" + data.building+ "  ,因重复信息，导入失败 ：" + data.repeat);
+						window.location.replace("hw_table_student_invalid.html");
+					}
+					else if(data.school != 0 && data.building != 0){
+						alert( "因学校不匹配导入失败:" + data.school  + "  ,因地址不匹配，导入失败 ：" + data.building);
+						window.location.replace("hw_table_student_invalid.html");
+					}
+					else if(data.school != 0){
+						//alert(data.school);
+						alert("因学校不匹配导入失败:" + data.school);
+						window.location.replace("hw_table_student_invalid.html");
+					}
+					else if(data.building != 0){
+						alert("因地址不匹配，导入失败 ：" + data.building);
+						window.location.replace("hw_table_student_invalid.html");
+					}
+					else if(data.repeat != 0){
+						alert("因重复信息，导入失败 ：" + data.repeat);
+						window.location.replace("hw_table_student_invalid.html");
+					}
+					else{
+						alert("导入成功!");
+						window.location.replace("hw_table_student_invalid.html");
+					}
+		});
+	}
 	
-	$.post(
-			"AddStudentFromExcel.action",
-			{
-				student_info:stu_str,
-				school_name:SchoolName,
-				area_id:areaid,
-			}, 
-			function(data) {
-   				var data = JSON.parse(data);
-				//alert("总共 :" + data.all +"项" + "  ,因学校不匹配导入失败:" + (data.all - data.school) + "项" + "  ,因楼盘不匹配，导入失败 ：" + data.bcnt+"项")
-				if(data.school != 0 && data.building != 0  && data.repeat != 0 && data.house!= 0){
-					alert( "因学校不匹配导入失败:" + data.school  + "  ,因楼盘不匹配，导入失败 ：" + data.building+ "  ,因重复信息，导入失败 ：" + data.repeat + "  ,因房屋不匹配，导入失败 ：" + data.house);
-					window.location.replace("hw_table_student_all.html");
-				}
-				else if(data.building != 0  && data.repeat != 0 && data.house!= 0){
-					alert( "因楼盘不匹配，导入失败 ：" + data.building+ "  ,因重复信息，导入失败 ：" + data.repeat + "  ,因房屋不匹配，导入失败 ：" + data.house);
-					window.location.replace("hw_table_student_all.html");
-				}
-				else if(data.school != 0  && data.repeat != 0 && data.house!= 0){
-					alert( "因学校不匹配导入失败:" + data.school  + "  ,因重复信息，导入失败 ：" + data.repeat + "  ,因房屋不匹配，导入失败 ：" + data.house);
-					window.location.replace("hw_table_student_all.html");
-				}
-				else if(data.school != 0 && data.building != 0&& data.house!= 0){
-					alert( "因学校不匹配导入失败:" + data.school  + "  ,因楼盘不匹配，导入失败 ：" + data.building+ "  ,因房屋不匹配，导入失败 ：" + data.house);
-					window.location.replace("hw_table_student_all.html");
-				}
-				else if(data.school != 0 && data.building != 0  && data.repeat != 0){
-					alert( "因学校不匹配导入失败:" + data.school  + "  ,因楼盘不匹配，导入失败 ：" + data.building+ "  ,因重复信息，导入失败 ：" + data.repeat );
-					window.location.replace("hw_table_student_all.html");
-				}
-				else if(data.school != 0 && data.repeat != 0){
-					alert( "因学校不匹配导入失败:" + data.school  +"  ,因重复信息，导入失败 ：" + data.repeat);
-					window.location.replace("hw_table_student_all.html");
-				}
-				else if(data.repeat != 0 && data.building != 0){
-					alert("因楼盘不匹配，导入失败 ：" + data.building+ "  ,因重复信息，导入失败 ：" + data.repeat);
-					window.location.replace("hw_table_student_all.html");
-				}
-				else if(data.school != 0 && data.building != 0){
-					alert( "因学校不匹配导入失败:" + data.school  + "  ,因楼盘不匹配，导入失败 ：" + data.building);
-					window.location.replace("hw_table_student_all.html");
-				}
-				else if(data.school != 0 && data.house != 0){
-					alert( "因学校不匹配导入失败:" + data.school  + "  ,因房屋不匹配，导入失败 ：" + data.house);
-					window.location.replace("hw_table_student_all.html");
-				}
-				else if(data.house != 0 && data.building != 0){
-					alert( "因房屋不匹配导入失败:" + data.school  + "  ,因楼盘不匹配，导入失败 ：" + data.building);
-					window.location.replace("hw_table_student_all.html");
-				}
-				else if(data.house != 0 && data.repeat != 0){
-					alert( "因房屋不匹配导入失败:" + data.house  + "  ,因重复，导入失败 ：" + data.repeat);
-					window.location.replace("hw_table_student_all.html");
-				}
-				else if(data.house != 0){
-					alert("因房屋不匹配导入失败:" + data.house);
-					window.location.replace("hw_table_student_all.html");
-				}
-				else if(data.school != 0){
-					//alert(data.school);
-					alert("因学校不匹配导入失败:" + data.school);
-					window.location.replace("hw_table_student_all.html");
-				}
-				else if(data.building != 0){
-					alert("因楼盘不匹配，导入失败 ：" + data.building);
-					window.location.replace("hw_table_student_all.html");
-				}
-				else if(data.repeat != 0){
-					alert("因重复信息，导入失败 ：" + data.repeat);
-					window.location.replace("hw_table_student_all.html");
-				}
-				else{
-					alert("导入成功!");
-					window.location.replace("hw_table_student_all.html");
-				}
-	});
+
 })
 
 function csv2table(csv)

@@ -16,6 +16,8 @@ public interface TempStudentDAO {
 	
 	public List<TempStudent> getAllStudent();
 	
+	public List<TempStudent> getTempStudentInvalidByPageSize(int i,int PageSize);
+	
 	public List<TempStudent> getAllStudentByPageSize(int i,int PageSize);
 	
 	public List<TempStudent> getStudentBySchool(String StudentSchool);
@@ -23,4 +25,8 @@ public interface TempStudentDAO {
 	public List<TempStudent> getStudentBySchoolPageSize(String StudentSchool,int i,int PageSize);
 	
 	public List<TempStudent> StudentValid(String student_school,String student_building,String student_housenum,String student_roomid);
+
+	public List<TempStudent> StudentByInfoName(String student_name,String student_building,String student_housenum,String student_ownerid,String student_school);
+	
+	public void SaveListTempStudent(List<TempStudent> student);
 }

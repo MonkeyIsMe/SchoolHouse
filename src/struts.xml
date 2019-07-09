@@ -174,6 +174,21 @@
             </result>
 		</action>
 		
+		<action name="VagueStudentByPalceAndSchool" class="com.tongansz.controller.StudentInfoAction" method="VagueStudentByPalceAndSchool">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		
+		<action name="VagueStudentByPalce" class="com.tongansz.controller.StudentInfoAction" method="VagueStudentByPalce">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
 		<action name="QueryStudentBySchoolPageSize" class="com.tongansz.controller.StudentInfoAction" method="QueryStudentBySchoolPageSize">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="success" type="json">
@@ -291,22 +306,8 @@
 			 <result name="Success" type="json"></result>
 		</action>
 		
-		<action name="SetBuildingValid" class="com.tongansz.controller.BuildingAction" method="SetBuildingValid">
-			<!-- 定义处理结果与视图资源之间的关系 -->
-			 <result name="Success" type="json"></result>
-		</action>
 		
 		<action name="UpdateBuilding" class="com.tongansz.controller.BuildingAction" method="UpdateBuilding">
-			<!-- 定义处理结果与视图资源之间的关系 -->
-			 <result name="Success" type="json"></result>
-		</action>
-		
-		<action name="SubmitBuilding" class="com.tongansz.controller.BuildingAction" method="SubmitBuilding">
-			<!-- 定义处理结果与视图资源之间的关系 -->
-			 <result name="Success" type="json"></result>
-		</action>
-		
-		<action name="UnSubmitBuilding" class="com.tongansz.controller.BuildingAction" method="UnSubmitBuilding">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="Success" type="json"></result>
 		</action>
@@ -414,13 +415,43 @@
 			 <result name="Success" type="json"></result>
 		</action>
 		
+		<action name="AddSchoolFromExcel" class="com.tongansz.controller.ReadExcelAction" method="AddSchoolFromExcel">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
 		<action name="AddStudentFromExcelValid" class="com.tongansz.controller.ReadExcelAction" method="AddStudentFromExcelValid">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="Success" type="json"></result>
 		</action>
 		
+		<action name="AddAreaFromExcel" class="com.tongansz.controller.ReadExcelAction" method="AddAreaFromExcel">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
 		
 		<action name="QueryAllTempStudent" class="com.tongansz.controller.TempStudentInfoAction" method="QueryAllTempStudent">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="QueryTempStudentCheck" class="com.tongansz.controller.TempStudentInfoAction" method="QueryTempStudentCheck">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="QueryTempStudentValid" class="com.tongansz.controller.TempStudentInfoAction" method="QueryTempStudentValid">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="success" type="json">
+			  <param name="root">arr</param>
+            </result>
+		</action>
+		
+		<action name="QueryTempStudentInvalid" class="com.tongansz.controller.TempStudentInfoAction" method="QueryTempStudentInvalid">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="success" type="json">
 			  <param name="root">arr</param>
@@ -449,6 +480,11 @@
 		</action>
 		
 		<action name="AddTempStudent" class="com.tongansz.controller.TempStudentAction" method="AddTempStudent">
+			<!-- 定义处理结果与视图资源之间的关系 -->
+			 <result name="Success" type="json"></result>
+		</action>
+		
+		<action name="SaveStudent" class="com.tongansz.controller.TempStudentAction" method="SaveStudent">
 			<!-- 定义处理结果与视图资源之间的关系 -->
 			 <result name="Success" type="json"></result>
 		</action>

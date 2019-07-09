@@ -169,18 +169,17 @@ public class HouseDAOImpl implements HouseDAO{
 
 
 	@Override
-	public List<House> getHouseByName(String buding_id,String house_name, String house_room) {
+	public List<House> getHouseByName(String buding_id,String house_name) {
 		// TODO Auto-generated method stub
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 		List<House> list = null;
 		try {
 			session.beginTransaction();
-			String hql = "from House where buding_id = :buding_id AND house_name = :house_name AND house_room = :house_room";
+			String hql = "from House where buding_id = :buding_id AND house_name = :house_name";
 			Query query = session.createQuery(hql);
 			query.setParameter("buding_id", buding_id);
 			query.setParameter("house_name", house_name);
-			query.setParameter("house_room", house_room);
 			
 			list = query.list();
 			session.getTransaction().commit();

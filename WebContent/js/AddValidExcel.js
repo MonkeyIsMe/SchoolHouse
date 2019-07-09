@@ -4,6 +4,8 @@
 var SchoolName;
 var schoolid;
 var areaid;
+var stu_str;
+var stu_json;
 $(function(){
 	$.ajaxSettings.async = false;
 	$.post(
@@ -24,7 +26,7 @@ $(function(){
 							var datas = JSON.parse(datas);
 							//console.log(datas);
 							SchoolName = datas.schoolName;
-							areaid = datas.areaId;S
+							areaid = datas.areaId;
 					}
 				);
 		}
@@ -51,9 +53,9 @@ $(function(){
 		var sheetNames = workbook.SheetNames; // 工作表名称的集合
         var worksheet = workbook.Sheets[sheetNames[0]]; // 暂时只取第一张sheet
         // 生成json数据
-        var stu_json = XLSX.utils.sheet_to_json(worksheet);
+        stu_json = XLSX.utils.sheet_to_json(worksheet);
         //传到后端
-        var stu_str = JSON.stringify(stu_json);  
+        stu_str = JSON.stringify(stu_json);  
        // console.log(stu_str);
 /*        $.ajax({  
             url: "AddStudentFromExcel.action",  
@@ -67,7 +69,22 @@ $(function(){
         }); */         
         //console.log(stu_json);
         
-        $("#bt_add").click(function(){
+    	
+		var csv = XLSX.utils.sheet_to_csv(worksheet);
+		document.getElementById('result').innerHTML = csv2table(csv);
+	}
+
+	
+    
+    $("#bt_add").click(function(){
+    	if(stu_str == null || stu_str == ""){
+    		alert("数据非法！");
+    	}
+    	else{
+    		console.log(stu_json);
+    		console.log(stu_str);
+    		stu_str = stu_str.replace(/[\r\n]/g,"");
+    		stu_str = stu_str.replace(/\s+/g,"");
         	$.post(
         			"AddStudentFromExcelValid.action",
         			{
@@ -78,28 +95,16 @@ $(function(){
         			function(data) {
         				var data = JSON.parse(data);
         				//alert("总共 :" + data.all +"项" + "  ,因学校不匹配导入失败:" + (data.all - data.school) + "项" + "  ,因楼盘不匹配，导入失败 ：" + data.bcnt+"项")
-        				if(data.school != 0 && data.building != 0  && data.repeat != 0){
-        					alert( "因学校不匹配导入失败:" + data.sinfo  + "  ,因楼盘不匹配，导入失败 ：" + data.binfo+ "  ,因重复信息，导入失败 ：" + data.rinfo);
+        				if(data.school != 0  && data.repeat != 0){
+        					alert( "因学校不匹配导入失败:" + data.sinfo  +  "  ,因重复信息，导入失败 ：" + data.rinfo);
         					window.close();
         				}
         				else if(data.school != 0 && data.repeat != 0){
         					alert( "因学校不匹配导入失败:" + data.sinfo  +"  ,因重复信息，导入失败 ：" + data.rinfo);
         					window.close();
         				}
-        				else if(data.repeat != 0 && data.building != 0){
-        					alert("因楼盘不匹配，导入失败 ：" + data.binfo+ "  ,因重复信息，导入失败 ：" + data.rinfo);
-        					window.close();
-        				}
-        				else if(data.school != 0 && data.building != 0){
-        					alert( "因学校不匹配导入失败:" + data.sinfo  + "  ,因楼盘不匹配，导入失败 ：" + data.binfo);
-        					window.close();
-        				}
         				else if(data.school != 0){
         					alert("因学校不匹配导入失败:" + data.sinfo);
-        					window.close();
-        				}
-        				else if(data.building != 0){
-        					alert("因楼盘不匹配，导入失败 ：" + data.binfo);
         					window.close();
         				}
         				else if(data.repeat != 0){
@@ -112,13 +117,10 @@ $(function(){
         				}
         				
         	});
-        })
-        
-    	
-		var csv = XLSX.utils.sheet_to_csv(worksheet);
-		document.getElementById('result').innerHTML = csv2table(csv);
-	}
+    	}
 
+    })
+	
 	function csv2table(csv)
 	{
 		var html = '<table class="table table-bordered table-hover table-condensed" style="width:100%; margin-top:1%;">';

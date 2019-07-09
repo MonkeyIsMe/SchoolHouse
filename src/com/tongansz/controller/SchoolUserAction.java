@@ -168,6 +168,7 @@ public class SchoolUserAction extends ActionSupport{
 		String user_name =  request.getParameter("userName");
 		String user_tele =  request.getParameter("userPhone");
 		String school_id = request.getParameter("school_id");
+		String user_email = request.getParameter("user_email");
 		
 		
 		//System.out.println(user_id + " " + user_name + " " + user_tele);
@@ -197,11 +198,11 @@ public class SchoolUserAction extends ActionSupport{
 		user.setUserPhone(user_tele);
 		user.setSchoolName(SchoolName);
 		user.setUserPasswords(user_pwd);
+		user.setUserEmail(user_email);
+		user.setSchoolId(sid);
 		
 		//更新用户
 		flag = ud.update(user);
-		
-		
 		//返回结果
 		PrintWriter out = null;
 		out = ServletActionContext.getResponse().getWriter();
@@ -258,6 +259,7 @@ public class SchoolUserAction extends ActionSupport{
 		
 		//更新用户
 		flag = ud.update(user);
+		ud.update(user);
 		//System.out.println(flag);
 		
 		//返回结果
@@ -265,11 +267,15 @@ public class SchoolUserAction extends ActionSupport{
 		out = ServletActionContext.getResponse().getWriter();
 		
 		if(flag) {
+			request.getSession().setAttribute("suserlogintime", user.getUserLoginTime());
+			request.getSession().setAttribute("suserflag", user.getUserFlag());
 			request.getSession().setAttribute("susername", user_name);
 			request.getSession().setAttribute("susertele", user_tele);
 			request.getSession().setAttribute("suseremail", user_email);
 			request.getSession().setAttribute("suserid", u_id);
-			request.getSession().setAttribute("password", user_pwd);
+			request.getSession().setAttribute("spassword", user_pwd);
+			//System.out.println(user_pwd);
+			request.getSession().setAttribute("sschoolid", user.getSchoolId());
 			out.println("Success");
 	        out.flush(); 
 	        out.close(); 
@@ -302,6 +308,7 @@ public class SchoolUserAction extends ActionSupport{
 		//删除用户
 		flag = ud.delete(user);
 		
+		if(ud.query(u_id)!= null) ud.delete(user);
 		
 		//返回结果
 		PrintWriter out = null;

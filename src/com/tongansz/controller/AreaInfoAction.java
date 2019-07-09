@@ -49,11 +49,16 @@ public class AreaInfoAction extends ActionSupport{
 		String username = (String) session.getAttribute("username");
 		if(username == "" || username == null) 
 			return null;
-		
+		JSONArray arr = new JSONArray();
 		AreaDAO ad = new AreaDAOImpl();
 		List<Area> list = ad.getAllArea();
+		int j = 1;
+		for(Area area : list) {
+			JSONObject jo = JSONObject.fromObject(area);
+			jo.accumulate("id", j++);
+			arr.add(jo);
+		}
 		
-		JSONArray arr = JSONArray.fromObject(list);
 		PrintWriter out = null;
 		out = ServletActionContext.getResponse().getWriter();
 		out.println(arr.toString());

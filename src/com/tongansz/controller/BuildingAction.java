@@ -56,8 +56,6 @@ public class BuildingAction extends ActionSupport{
 		building.setBuildingStreet(building_street);
 		building.setBuildingCreatTime(CreatTime);
 		building.setSchoolId(sid);
-		building.setBuildingFlag(0);
-		building.setBuildingHint("未提交");
 		
 		boolean flag = false;
 		
@@ -155,101 +153,6 @@ public class BuildingAction extends ActionSupport{
 		}
 	}
 	
-	public String SetBuildingValid() throws IOException{
-		
-		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
-		HttpServletRequest request= ServletActionContext.getRequest();
-		
-		String building_id =  request.getParameter("building_id");
-		
-		int b_id = Integer.valueOf(building_id);
-		BuildingDAO bd = new BuildingDAOImpl();
-		Building building = bd.query(b_id);
-		building.setBuildingFlag(1);
-		building.setBuildingHint("审核通过");
-		boolean flag = false;
-		
-		flag = bd.update(building);
-		
-		//返回结果
-		PrintWriter out = null;
-		out = ServletActionContext.getResponse().getWriter();
-				
-		if(flag) {
-			out.println("Success");
-			out.flush(); 
-			out.close(); 
-			return null;
-		}
-		else {
-				out.println("Fail");
-				return null;
-		}
-	}
-	
-	public String SubmitBuilding() throws IOException{
-		
-		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
-		HttpServletRequest request= ServletActionContext.getRequest();
-		
-		String building_id =  request.getParameter("building_id");
-		
-		int b_id = Integer.valueOf(building_id);
-		BuildingDAO bd = new BuildingDAOImpl();
-		Building building = bd.query(b_id);
-		building.setBuildingFlag(2);
-		building.setBuildingHint("审核中");
-		boolean flag = false;
-		
-		flag = bd.update(building);
-		
-		//返回结果
-		PrintWriter out = null;
-		out = ServletActionContext.getResponse().getWriter();
-				
-		if(flag) {
-			out.println("Success");
-			out.flush(); 
-			out.close(); 
-			return null;
-		}
-		else {
-				out.println("Fail");
-				return null;
-		}
-	}
-	
-	public String UnSubmitBuilding() throws IOException{
-		
-		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
-		HttpServletRequest request= ServletActionContext.getRequest();
-		
-		String building_id =  request.getParameter("building_id");
-		
-		int b_id = Integer.valueOf(building_id);
-		BuildingDAO bd = new BuildingDAOImpl();
-		Building building = bd.query(b_id);
-		building.setBuildingFlag(-1);
-		building.setBuildingHint("未通过");
-		boolean flag = false;
-		
-		flag = bd.update(building);
-		
-		//返回结果
-		PrintWriter out = null;
-		out = ServletActionContext.getResponse().getWriter();
-				
-		if(flag) {
-			out.println("Success");
-			out.flush(); 
-			out.close(); 
-			return null;
-		}
-		else {
-				out.println("Fail");
-				return null;
-		}
-	}
 	
 	public String BuildingIsExit() throws IOException{
 		

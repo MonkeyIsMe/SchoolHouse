@@ -26,7 +26,7 @@ function SchInfo(){
 			}, 
 			function(data) {
 				var data = JSON.parse(data);
-				//console.log(data);
+				console.log(data);
 				SchoolId = data.schoolid;
 				userid = data.userid;
 				username = data.username;
@@ -73,17 +73,7 @@ function logout(){
 				
 			}, 
 			function(data) {
-				window.location.replace("welcome.html");
-		}
-	);
-	
-	$.post(
-			"DeleteAllTempStudent.action",
-			{
-				
-			}, 
-			function(data) {
-				window.location.replace("welcome.html");
+				window.location.replace("login_sch.html");
 		}
 	);
 	
@@ -101,7 +91,7 @@ $(document).ready(function() {
     $("#school_info").click(function() {
         $("#school-info-modal").modal("show");
     }); 
-    
+    //alert(pwd);
 	$("#edit_schuserName").val(username);
 	$("#edit_schtel").val(usertele);
 	$("#edit_email").val(useremail);

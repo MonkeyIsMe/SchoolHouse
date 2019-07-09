@@ -9,13 +9,13 @@ import com.tongansz.model.Student;
 
 public class SchoolRule {
 	
-	public boolean IsValid(String name,String building, String house,String room,String Date,String HouseCard,String relation,String IDCard,String father,String mother) throws ParseException {
-		
+	public boolean IsValid(String name,String building, String house,String Date,String HouseCard,String relation,String IDCard,String father,String mother) throws ParseException {
+		System.out.println("IDCard =" + IDCard );
 		boolean flag = false;
 		boolean IDflag = false;
-		boolean rflag = false;
+		//boolean rflag = false;
 		StudentDAO sd = new StudentDAOImpl();
-		List<Student> list = sd.StudentValid(building, house, room);
+		List<Student> list = sd.StudentValid(building, house);
 		//System.out.println(list.size());
 		if(list.size() == 0) flag = true;
 		else {
@@ -27,22 +27,26 @@ public class SchoolRule {
 			String Use = stu.getStudentUseTime();
 			int valid = UseTime.compareTo(Use);
 			if(valid >= 1) flag = true;
-			//System.out.println(valid);
+			//System.out.println(valid);ddddd
+			//System.out.println(HouseCard.equals(stu.getStudentHouseCard()) +" " + IDCard.equals(stu.getStudentOwnerId()));
 			if(flag == false) {
-				if(HouseCard.equals(stu.getStudentHouseCard()) && IDCard.equals(stu.getStudentOwnerId())){
-					IDflag = true;
+				if(stu.getStudentHouseCard() == null || stu.getStudentOwnerId() == null) {
+					IDflag = false;
 				}
-				if(relation.equals("父子")||relation.equals("母女")||relation.equals("父女")||relation.equals("母子")) {
-					if(father.equals(stu.getStudentFather())&&mother.equals(stu.getStudentMother())) {
-						rflag = true;
-					}
-					
+				else if(stu.getStudentHouseCard() == "" || stu.getStudentOwnerId() == "") {
+					IDflag = false;
+				}
+				else if(HouseCard == "" || HouseCard == null) {
+					IDflag = false;
+				}
+				else if(HouseCard.equals(stu.getStudentHouseCard()) && IDCard.equals(stu.getStudentOwnerId())){
+					IDflag = true;
 				}
 			}
 			
  		}
 		
-		if(IDflag && rflag) flag = true;
+		if(IDflag) flag = true;
 		return flag;
 		
 	}

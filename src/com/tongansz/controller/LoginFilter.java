@@ -37,10 +37,10 @@ public class LoginFilter extends HttpServlet implements Filter{
 //        Integer roleId =  (Integer) session.getAttribute("roleId");
         //System.out.println("roleId:"+roleId);
         //String username = (String) session.getAttribute("user");
-       // System.out.println("username:"+username);
-       // System.out.println("susername:"+susername);
-        //System.out.println(contextPath);
-       // System.out.println(url);
+        System.out.println("username:"+username);
+       	System.out.println("susername:"+susername);
+        System.out.println(contextPath);
+        System.out.println(url);
          if(url.indexOf("welcome.html")>-1&&(username==null || username == "" )&&( susername == null || susername == "")){
         	 chain.doFilter(req, res);
          }

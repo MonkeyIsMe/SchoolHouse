@@ -52,6 +52,7 @@
                     </div>
                     <div class="ibox-content">
                         <div class="button-opt col-sm-3">
+                            <input type="file" id="file" style="display:none;" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
                             <button type="button" id="bt_add" class="btn btn-primary mybutton" data-toggle="modal" data-target="">
                               添加
                             </button>                        
@@ -61,7 +62,12 @@
                             <button type="button" id="bt_del" class="btn btn-primary mybutton" data-toggle="modal" data-target="">
                               删除
                             </button>
+                            <button type="button" id="bt_excel" class="btn btn-primary mybutton" data-toggle="modal" data-target="">
+                              导入Excel
+                            </button>
                         </div>
+                        <!-- 输出excel解析结果 -->
+                        <div id="result"></div>    
                         <div class="jqGrid_wrapper col-sm-12">
                             <table id="table_list_2"></table>
                             <div id="pager_list_2"></div>
@@ -136,7 +142,7 @@
     <script src="js/plugins/jqgrid/jquery.jqGrid.minffe4.js?0820"></script>
     <script src="js/content.min.js?v=1.0.0"></script>
 	<script src="js/AreaInfo.js"></script>
-    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+
 </body>
 
 

@@ -42,37 +42,44 @@ $(document).ready(function() {
 									editable : true,
 									width : 60,
 									sorttype : "int",
-									search : true
+									search : false,
+									searchoptions: {sopt:['cn']},
 								}, {
 									name : "userAccount",
 									index : "userAccount",
 									editable : true,
+									searchoptions: {sopt:['cn']},
 									width : 90
 								}, {
 									name : "userName",
 									index : "userName",
 									editable : true,
+									searchoptions: {sopt:['cn']},
 									width : 100
 								}, {
 									name : "userPhone",
 									index : "userPhone",
 									editable : true,
 									width : 80,
+									searchoptions: {sopt:['cn']},
 									align : "left"
 								},{
 									name : "userLoginTime",
 									index : "userLoginTime",
 									editable : true,
+									searchoptions: {sopt:['cn']},
 									width : 80,
 									align : "left"
 								}, {
 									name : "userUpdateTime",
 									index : "userUpdateTime",
+									searchoptions: {sopt:['cn']},
 									editable : true,
 									width : 100,
 									sortable : false
 								}, {
 									name : "userCreatTime",
+									searchoptions: {sopt:['cn']},
 									index : "userCreatTime",
 									editable : true,
 									width : 120,
@@ -83,6 +90,7 @@ $(document).ready(function() {
 									editable : true,
 									width : 120,
 									align : "center",
+									search:false,
 									formatter: function (value, grid, rows, state) { return "<button type='button' class=btn btn-primary' style='background-color:#B8B8B8' title='通过' onclick='approve("+rows.userId+")'>通过</button>&nbsp;&nbsp;<button type='button' class=btn btn-primary' style='background-color:#B8B8B8'  onclick='disapprove("+ rows.userId +")'>不通过</button>" } 
 								} ],
 								pager : "#pager_list_2",
@@ -98,7 +106,7 @@ $(document).ready(function() {
 						edit : false,
 						add : false,
 						del : false,
-						search : false
+						search : true
 					}, {
 						height : 400,
 						reloadAfterSubmit : true

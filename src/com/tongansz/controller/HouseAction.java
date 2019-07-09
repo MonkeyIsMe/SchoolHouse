@@ -157,7 +157,7 @@ public class HouseAction extends ActionSupport{
 		boolean flag = false;
 		
 		HouseDAO hd = new HouseDAOImpl();
-		List<House> list = hd.getHouseByName(building_id, house_name, house_room);
+		List<House> list = hd.getHouseByName(building_id, house_name);
 		
 		if(list.size() ==0) {
 			flag = true;

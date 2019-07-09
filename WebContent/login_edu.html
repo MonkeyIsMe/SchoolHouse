@@ -11,7 +11,7 @@
     
     <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-
+	<link href="css/patch.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
     <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
     <!--[if lt IE 9]>
@@ -21,7 +21,32 @@
 </head>
 
 <body class="gray-bg">
-
+	
+	<div class="add-edit-modal">
+    <div class="modal fade mymodal" id="add-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">保密承诺</h4>
+          </div>
+          <div class="modal-body">
+         	我知道我接下来的工作，有机会知悉我单位（或者虽属于第三方，但我单位负有保密义务的）机密信息，我郑重承诺，一旦同意，我承担的保密义务包括但不限于如下： <br>
+1、点击同意键登录后，我所接触到的全部信息都为单位机密信息。<br>
+2、我会以谨慎、诚实的态度，采取必要、合理措施，维护我单位的机密信息。 <br>
+3、我不泄露、告知、公布、发布、出版、传授、许可、转让或者其他任何方式，使任何第三方（包括按照我单位保密制度规定不得知悉该秘密的我单位其他职员）知悉该机密信息。 <br>
+4、我不擅自使用我单位机密信息，不私自转让或许可任何第三方使用该机密信息。 <br>
+         	
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" id="EduDismiss" data-dismiss="modal">不同意</button>
+            <button type="button" id="EduAgree" class="btn btn-primary">同意</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+	
     <div class="middle-box text-center loginscreen  animated fadeInDown">
         <div>
             <div>
@@ -44,7 +69,7 @@
                     <img src="SendCode.action" id="code_img" onclick="resetCode()" style="float: left; width:80px; height:30px; margin-top: 5px; margin-bottom: 5px" onclick="">
                     <small style="float: left; margin-top: 20px" >点击图片刷新验证码</small>
                 </div>
-                <button class="btn btn-primary block full-width m-b" onclick="edu_login()">登 录</button>
+                <button class="btn btn-primary block full-width m-b" id="edu_agree" data-toggle="modal" data-target="" onclick="EduAgree()">登 录</button>
 
 
                 <p class="text-muted text-center"> <a href="Userforget_pwd.html"><small>忘记密码？</small></a> <!-- | <a href="register_edu.html"> 注册一个新账号</a> -->

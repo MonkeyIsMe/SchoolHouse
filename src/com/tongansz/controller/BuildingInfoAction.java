@@ -101,11 +101,8 @@ public class BuildingInfoAction extends ActionSupport{
 		List<Building> list = bd.getBuildingBySchoolId(sid);
 		JSONArray arr = new JSONArray();
 		for(Building building : list) {
-			if(building.getBuildingFlag() == 1) {
 				JSONObject jo = JSONObject.fromObject(building);
-				arr.add(jo);
-			}
-			 
+				arr.add(jo); 
 		}
 		
 		PrintWriter out = null;

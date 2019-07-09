@@ -18,7 +18,7 @@ public interface HouseDAO {
 	
 	public List<House> getHouseByBuilding(int BuildingId);
 	
-	public List<House> getHouseByName(String buding_id,String house_name,String house_room);
+	public List<House> getHouseByName(String buding_id,String house_name);
 	
 	public List<House> getAllHouseByPageSize(int i,int PageSize);
 }

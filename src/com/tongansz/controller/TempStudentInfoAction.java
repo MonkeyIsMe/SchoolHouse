@@ -113,7 +113,7 @@ public class TempStudentInfoAction extends ActionSupport{
 		List<TempStudent> list = sd.getStudentBySchool(School_Name);
 		for(TempStudent stu : list) {
 			int IsValid = stu.getStudentValid();
-			if(IsValid == 1) {
+			if(IsValid == 0) {
 				JSONObject jo = JSONObject.fromObject(stu);
 				arr.add(jo);
 			}
@@ -140,7 +140,7 @@ public class TempStudentInfoAction extends ActionSupport{
 		List<TempStudent> list = sd.getStudentBySchool(School_Name);
 		for(TempStudent stu : list) {
 			int IsValid = stu.getStudentValid();
-			if(IsValid == 0) {
+			if(IsValid == -1) {
 				JSONObject jo = JSONObject.fromObject(stu);
 				arr.add(jo);
 			}
@@ -171,7 +171,7 @@ public class TempStudentInfoAction extends ActionSupport{
 		List<TempStudent> list = sd.getStudentBySchoolPageSize(School_Name, rows, pagesize);
 		for(TempStudent stu : list) {
 			int IsValid = stu.getStudentValid();
-			if(IsValid == 1) {
+			if(IsValid == 0) {
 				JSONObject jo = JSONObject.fromObject(stu);
 				arr.add(jo);
 			}
@@ -202,7 +202,7 @@ public class TempStudentInfoAction extends ActionSupport{
 		List<TempStudent> list = sd.getStudentBySchoolPageSize(School_Name, rows, pagesize);
 		for(TempStudent stu : list) {
 			int IsValid = stu.getStudentValid();
-			if(IsValid == 0) {
+			if(IsValid == -1) {
 				JSONObject jo = JSONObject.fromObject(stu);
 				arr.add(jo);
 			}
@@ -215,4 +215,81 @@ public class TempStudentInfoAction extends ActionSupport{
 		//System.out.println(arr.size());
 		return SUCCESS;
 	}
+
+	public String QueryTempStudentInvalid() throws IOException{
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		TempStudentDAO sd = new TempStudentDAOImpl();
+		JSONArray arr = new JSONArray();
+		List<TempStudent> list = sd.getAllStudent();
+		for(TempStudent stu : list) {
+			int IsValid = stu.getStudentValid();
+			if(IsValid == -1) {
+				JSONObject jo = JSONObject.fromObject(stu);
+				arr.add(jo);
+			}
+		}
+		
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		out.println(arr.toString());
+        out.flush(); 
+        out.close(); 
+		//System.out.println(arr.size());
+		return SUCCESS;
+	}
+	
+	public String QueryTempStudentValid() throws IOException{
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		TempStudentDAO sd = new TempStudentDAOImpl();
+		JSONArray arr = new JSONArray();
+		List<TempStudent> list = sd.getAllStudent();
+		for(TempStudent stu : list) {
+			int IsValid = stu.getStudentValid();
+			if(IsValid == 0) {
+				JSONObject jo = JSONObject.fromObject(stu);
+				arr.add(jo);
+			}
+		}
+		
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		out.println(arr.toString());
+        out.flush(); 
+        out.close(); 
+		//System.out.println(arr.size());
+		return SUCCESS;
+	}
+	
+	public String QueryTempStudentCheck() throws IOException{
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		boolean flag = false;
+		
+		TempStudentDAO sd = new TempStudentDAOImpl();
+		JSONArray arr = new JSONArray();
+		List<TempStudent> list = sd.getAllStudent();
+		for(TempStudent stu : list) {
+			String check = stu.getStudentRoomId();
+
+			if(!(check==null||check.equals(""))){
+				System.out.println(stu.toString());
+				JSONObject jo = JSONObject.fromObject(stu);
+				arr.add(jo);
+			}
+		}
+		
+		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		out.println(arr.toString());
+        out.flush(); 
+        out.close(); 
+		//System.out.println(arr.size());
+		return SUCCESS;
+	}
+	
 }

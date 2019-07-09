@@ -19,8 +19,7 @@ public class House {
 	private int BuildingId; //楼盘号
 	
 	@Column(name="house_name")
-	private String HouseName; //楼栋数
-	
+	private String HouseName; //地址
 	
 	@Column(name="house_room")
 	private String HouseRoom; //房号

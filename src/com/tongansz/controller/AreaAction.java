@@ -59,19 +59,18 @@ public class AreaAction extends ActionSupport{
 	
 	
 	public String UpdateArea() throws IOException{
-		//System.out.println("1111111111111");
 		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
 		HttpServletRequest request= ServletActionContext.getRequest();
 		
 		String area_id = request.getParameter("area_id");
 		String area_name = request.getParameter("area_name");
-		//System.out.println(area_id + " " + area_name);
+		
 		int a_id = Integer.valueOf(area_id);
 		
 		AreaDAO ad = new AreaDAOImpl();
 		Area area = ad.query(a_id);
 		area.setAreaName(area_name);
-		//System.out.println(area_name);
+		
 		boolean flag = false;
 		
 		SchoolDAO sd = new SchoolDAOImpl();
@@ -86,6 +85,7 @@ public class AreaAction extends ActionSupport{
 		out = ServletActionContext.getResponse().getWriter();
 		
 		flag = ad.update(area);
+		ad.update(area);
 		
 		if(flag) {
 			out.println("Success");
@@ -110,7 +110,7 @@ public class AreaAction extends ActionSupport{
 		int a_id = Integer.valueOf(area_id);
 		
 		
-		
+		System.out.println(a_id);
 		AreaDAO ad = new AreaDAOImpl();
 		Area area = ad.query(a_id);
 		
@@ -121,6 +121,8 @@ public class AreaAction extends ActionSupport{
 		out = ServletActionContext.getResponse().getWriter();
 		
 		flag = ad.delete(area);
+		
+		if(ad.query(a_id) != null) ad.delete(ad.query(a_id));
 		
 		if(flag) {
 			out.println("Success");

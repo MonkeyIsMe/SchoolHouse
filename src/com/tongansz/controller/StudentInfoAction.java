@@ -10,8 +10,11 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.tongansz.dao.SchoolDAO;
 import com.tongansz.dao.StudentDAO;
+import com.tongansz.dao.impl.SchoolDAOImpl;
 import com.tongansz.dao.impl.StudentDAOImpl;
+import com.tongansz.model.School;
 import com.tongansz.model.Student;
 
 import net.sf.json.JSONArray;
@@ -62,7 +65,7 @@ public class StudentInfoAction extends ActionSupport{
 		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
 		HttpServletRequest request= ServletActionContext.getRequest();
 		
-		String Rows =  request.getParameter("rows");
+		String Rows =  request.getParameter("rowss");
 		String PageSize =  request.getParameter("pagesize");
 		
 		int rows = Integer.valueOf(Rows);
@@ -70,7 +73,7 @@ public class StudentInfoAction extends ActionSupport{
 		
 		StudentDAO sd = new StudentDAOImpl();
 		List<Student> list = sd.getAllStudentByPageSize(rows, pagesize);
-		
+		//System.out.println("集合大小为:" + list.size());
 		JSONArray arr = JSONArray.fromObject(list);
 		PrintWriter out = null;
 		out = ServletActionContext.getResponse().getWriter();
@@ -171,6 +174,64 @@ public class StudentInfoAction extends ActionSupport{
 			}
 		}
 		PrintWriter out = null;
+		out = ServletActionContext.getResponse().getWriter();
+		out.println(arr.toString());
+        out.flush(); 
+        out.close(); 
+		//System.out.println(arr.size());
+		return SUCCESS;
+	}
+	
+	public String VagueStudentByPalce() throws IOException{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		String student_place =  request.getParameter("student_place");
+		
+		StudentDAO sd = new StudentDAOImpl();
+		List<Student> list = sd.VagueByPlace(student_place);
+		//System.out.println(student_place);
+		PrintWriter out = null;
+		JSONArray arr = JSONArray.fromObject(list);
+		out = ServletActionContext.getResponse().getWriter();
+		out.println(arr.toString());
+        out.flush(); 
+        out.close(); 
+		//System.out.println(arr.size());
+		return SUCCESS;
+	}
+	
+	
+	public String VagueStudentByPalceAndSchool() throws IOException{
+		
+		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
+		HttpServletRequest request= ServletActionContext.getRequest();
+		
+		String student_place =  request.getParameter("student_place");
+		String student_school =  request.getParameter("student_school");
+		
+		SchoolDAO schd = new SchoolDAOImpl();
+		StudentDAO sd = new StudentDAOImpl();
+		
+		JSONArray arr = new JSONArray();
+		
+		List<School> SchoolList = schd.getSchoolByName(student_school);
+		School school = SchoolList.get(0);
+		int aid = school.getAreaId();
+		List<School> aSchoolList = schd.getSchoolByArea(aid);
+		for(School sch : aSchoolList) {
+			String SchName = sch.getSchoolName();
+			List<Student> list = sd.VagueByPlaceAndSchool(student_place, SchName);
+			//System.out.println("list = " + list.size());
+			JSONArray ja = JSONArray.fromObject(list);
+			//System.out.println("ja = " + ja.size());
+			arr.addAll(ja);
+		}
+		
+		//System.out.println("arr = " + arr.size());
+		PrintWriter out = null;
+		//JSONArray arr = JSONArray.fromObject(list);
 		out = ServletActionContext.getResponse().getWriter();
 		out.println(arr.toString());
         out.flush(); 

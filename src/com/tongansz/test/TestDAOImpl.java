@@ -132,16 +132,7 @@ public class TestDAOImpl {
 		
 	}
 	
-	@Test
-	public void TestReadExcel() {
-		String str = "[{\"学生姓名\":\"1\",\"学生身份证号码\":\"2\",\"父亲姓名\":\"3\",\"母亲姓名\":\"4\",\"业主姓名\":\"5\",\"业主身份证\":\"123\",\"与业主关系\":\"6\",\"房产证号\":\"7\",\"房屋预告登记号\":\"8\",\"所属楼盘\":\"9\",\"楼号\":\"10\",\"房号\":\"11\",\"是否有效\":\"undefined\",\"所属学校\":\"12\",\"学生联系电话\":\"13\",\"使用的日期\":\"123\",\"毕业小学\":\"12\",\"创建日期\":\"undefined\"}]";
-		com.alibaba.fastjson.JSONArray ja = new com.alibaba.fastjson.JSONArray().parseArray(str);
-		for(int i = 0 ; i<ja.size() ; i++) {
-			com.alibaba.fastjson.JSONObject jo = ja.getJSONObject(i);
-			String platform = jo.getString("毕业小学");
-			System.out.println(platform);
-		}
-	}
+
 	
 	@Test
 	public void TestDates() throws ParseException {
@@ -177,15 +168,23 @@ public class TestDAOImpl {
 		System.out.println(list.size());
 	}
 	
+
+	
 	@Test
-	public void getHouseByName() {
-		String building = "长塘山小区";
-		String house = "4";
-		String room = "501";
-		HouseDAO hd = new HouseDAOImpl();
-		List<House> list = hd.getHouseByName(building, house, room);
+	public void GetStudentByPlace() {
+		String place = "招商南山郦景";
+		StudentDAO sd = new StudentDAOImpl();
+		List<Student> list = sd.VagueByPlace(place);
 		System.out.println(list.size());
 	}
 	
+	@Test
+	public void GetStudentByPlaceAndStudent() {
+		String place = "招商南山郦景";
+		String school = "南山外国语学校";
+		StudentDAO sd = new StudentDAOImpl();
+		List<Student> list = sd.VagueByPlaceAndSchool(place, school);
+		System.out.println(list.size());
+	}
 	
 }

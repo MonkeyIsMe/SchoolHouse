@@ -4,6 +4,9 @@
 
 
 var mydata = [];
+var obj_edit;
+
+var obj_del;
 
 function GetSchoolInfo(){
 	$.ajaxSettings.async = false;
@@ -52,9 +55,8 @@ $(document).ready(function() {
 						autowidth : true,
 						shrinkToFit : true,
 						rowNum : 20,
-						rowList : [ 10, 20, 30 ],
 						multiselect : true,
-						colNames : [ "序号", "账号", "用户昵称","用户密码", "电话号码", "所属学校", "登录时间",
+						colNames : [ "序号", "账号", "用户昵称","用户密码", "电话号码", "所属学校","用户邮箱", "登录时间",
 								"修改时间", "创建时间" ],
 						colModel : [ {
 							name : "userId",
@@ -62,27 +64,32 @@ $(document).ready(function() {
 							editable : true,
 							width : 60,
 							sorttype : "int",
-							search : true
+							searchoptions: {sopt:['cn']},
+							search : false,
 						}, {
 							name : "userAccount",
 							index : "userAccount",
+							searchoptions: {sopt:['cn']},
 							editable : false,
 							width : 90
 						}, {
 							name : "userName",
 							index : "userName",
+							searchoptions: {sopt:['cn']},
 							editable : true,
 							width : 100
 						}, 
 						{
 							name : "userPasswords",
 							index : "userPasswords",
+							searchoptions: {sopt:['cn']},
 							edittype:"password",
 							editable : true,
 							width : 100
 						},
 						{
 							name : "userPhone",
+							searchoptions: {sopt:['cn']},
 							index : "userPhone",
 							editable : true,
 							width : 80,
@@ -91,6 +98,15 @@ $(document).ready(function() {
 						{
 							name : "schoolName",
 							index : "schoolName",
+							searchoptions: {sopt:['cn']},
+							editable : true,
+							width : 80,
+							align : "left"
+						}, 
+						{
+							name : "userEmail",
+							index : "userEmail",
+							searchoptions: {sopt:['cn']},
 							editable : true,
 							width : 80,
 							align : "left"
@@ -98,20 +114,26 @@ $(document).ready(function() {
 						{
 							name : "userLoginTime",
 							index : "userLoginTime",
+							searchoptions: {sopt:['cn']},
 							editable : false,
 							width : 80,
+							search : false,
 							align : "left"
 						}, {
 							name : "userUpdateTime",
 							index : "userUpdateTime",
+							searchoptions: {sopt:['cn']},
 							editable : false,
+							search : false,
 							width : 100,
 							sortable : false
 						}, {
 							name : "userCreatTime",
 							index : "userCreatTime",
+							searchoptions: {sopt:['cn']},
 							editable : false,
 							width : 120,
+							search : false,
 							align : "left"
 						} ],
 						pager : "#pager_list_2",
@@ -127,7 +149,7 @@ $(document).ready(function() {
 				edit : false,
 				add : false,
 				del : false,
-				search : false,
+				search : true,
 			}, {
 				height : 400,
 				reloadAfterSubmit : true
@@ -137,9 +159,8 @@ $(document).ready(function() {
 				$("#table_list_2").setGridWidth(width)
 			})
 
-		    var obj_edit = $("#table_list_2").jqGrid("getRowData");//获取修改时多选的id，并放入到数组obj_edit中
+		    obj_edit = $("#table_list_2").jqGrid("getRowData");//获取修改时多选的id，并放入到数组obj_edit中
 		    
-			var obj_del;//获取到删除时多选的id，并放入到数组obj_del中
 		    $("#bt_add").click(function() {
 		        $("#mySave").css("display","inline");
 		        $("#myEdit").css("display","none");
@@ -292,20 +313,22 @@ $(document).ready(function() {
 		        	});
 
 					$("#bt_edit").click(function() {
+						obj_edit = $("#table_list_2").jqGrid("getRowData");
 						obj_del = $("#table_list_2").jqGrid("getGridParam","selarrrow");
+						var idd = (obj_del[0]-1)%20;
 						$("#up_mySave").css("display", "none");
 						$("#up_myEdit").css("display", "inline");
 
 						if (obj_del.length == 1) {
 							
 							$("#bt_edit").attr("data-target","#edit");
-							$("#up_schacount").val(obj_edit[obj_del[0]-1].userAccount);
-							$("#up_suuserName").val(obj_edit[obj_del[0] - 1].userName);
-							$("#up_schtel").val(obj_edit[obj_del[0] - 1].userPhone);
-							$("#up_schwpd").val(obj_edit[obj_del[0] - 1].userPasswords);
-							$("#up_school_id").val(obj_edit[obj_del[0] - 1].schoolId);
-							//alert(obj_edit[obj_del[0] - 1].userPassword);
-							
+							$("#up_schacount").val(obj_edit[idd].userAccount);
+							$("#up_suuserName").val(obj_edit[idd].userName);
+							$("#up_schtel").val(obj_edit[idd].userPhone);
+							$("#up_schwpd").val(obj_edit[idd].userPasswords);
+							$("#up_school_id").val(obj_edit[idd].schoolId);
+							$("#up_email").val(obj_edit[idd].userEmail);
+							//alert(obj_edit[obj_del[0] - 1].userEmail);
 						} else if(obj_del.length < 1){
 					        alert("请至少选择1项！");
 					        $("#bt_edit").attr("data-target","");
@@ -320,13 +343,14 @@ $(document).ready(function() {
 						var schwpd = $("#up_schwpd").val();
 						var schtel = $("#up_schtel").val();
 						var suuserName = $("#up_suuserName").val();
-						var sid = obj_edit[obj_del[0] - 1].userId;
+						var email = $("#up_email").val();
+						var sid = obj_edit[(obj_del[0] - 1)%20].userId;
 						var school_id =op1.val();
 						
 			        	var PhoneFlag = IsPhone(schtel);
 			        	var PasswordFlag = ValidPassword(schwpd);
 						
-						if(schwpd == null || schwpd =="" ||
+						if(schwpd == null || schwpd =="" || email == "" || email == null ||
 							schtel == null || schtel == "" || suuserName == null || suuserName =="" || school_id == null || school_id == ""){
 							alert("所有项必须非空！！！");
 						}
@@ -347,6 +371,7 @@ $(document).ready(function() {
 				        				userName:suuserName,
 				        				userPhone:schtel,
 				        				user_pwd:schwpd,
+				        				user_email:email
 				        			}, 
 				        			function(data) {
 										data = data.replace(/^\s*/, "").replace(/\s*$/,"");
@@ -363,7 +388,9 @@ $(document).ready(function() {
 					})
 					
 					$("#bt_del").click(function() {
+						obj_edit = $("#table_list_2").jqGrid("getRowData");
 						obj_del = $("#table_list_2").jqGrid("getGridParam","selarrrow");
+						
 						if (obj_del.length < 1) {
 							alert("请至少选择1项！");
 					        $("#bt_edit").attr("data-target","");

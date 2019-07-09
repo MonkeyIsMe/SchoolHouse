@@ -57,5 +57,8 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ognl-3.1.21.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/struts2-core-2.5.20.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/struts2-json-plugin-2.5.20.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/log4j-api-2.11.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/servlet-api.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -36,7 +36,6 @@ public class StudentAction extends ActionSupport{
 				String student_school = request.getParameter("student_school");
 				String student_tele = request.getParameter("student_tele");
 				String student_preschool = request.getParameter("student_preschool");
-				String student_roomid = request.getParameter("student_roomid");
 				String usetime = request.getParameter("usetime");
 				
 				
@@ -62,7 +61,6 @@ public class StudentAction extends ActionSupport{
 				stu.setStudentSchool(student_school);
 				stu.setStudentPhone(student_tele);
 				stu.setStudentPreSchool(student_preschool);
-				stu.setStudentRoomId(student_roomid);
 				stu.setStudentUseTime(ut);
 				SchoolRule sr = new SchoolRule();
 				//boolean valid = sr.IsValid(student_name,student_budingid, student_housenum, student_roomid,usetime,student_housecard,student_ownerid,student_relation);
@@ -107,7 +105,6 @@ public class StudentAction extends ActionSupport{
 			String student_school = request.getParameter("student_school");
 			String student_tele = request.getParameter("student_tele");
 			String student_preschool = request.getParameter("student_preschool");
-			String student_roomid = request.getParameter("student_roomid");
 			String usetime = request.getParameter("usetime");
 			
 			
@@ -133,7 +130,6 @@ public class StudentAction extends ActionSupport{
 			stu.setStudentPreSchool(student_preschool);
 			stu.setStudentSchool(student_school);
 			stu.setStudentPhone(student_tele);
-			stu.setStudentRoomId(student_roomid);
 			stu.setStudentValid(1);
 			stu.setStudentUseTime(ut);
 			
@@ -176,7 +172,6 @@ public class StudentAction extends ActionSupport{
 			String student_school = request.getParameter("student_school");
 			String student_tele = request.getParameter("student_tele");
 			String student_preschool = request.getParameter("student_preschool");
-			String student_roomid = request.getParameter("student_roomid");
 			String usetime = request.getParameter("usetime");
 			
 			
@@ -201,7 +196,6 @@ public class StudentAction extends ActionSupport{
 			stu.setStudentSchool(student_school);
 			stu.setStudentPreSchool(student_preschool);
 			stu.setStudentPhone(student_tele);
-			stu.setStudentRoomId(student_roomid);
 			stu.setStudentValid(0);
 			stu.setStudentUseTime(ut);
 			
@@ -247,7 +241,6 @@ public class StudentAction extends ActionSupport{
 				String student_school = request.getParameter("student_school");
 				String student_tele = request.getParameter("student_tele");
 				String student_preschool = request.getParameter("student_preschool");
-				String student_roomid = request.getParameter("student_roomid");
 				String usetime = request.getParameter("usetime");
 		
 				
@@ -273,7 +266,6 @@ public class StudentAction extends ActionSupport{
 				stu.setStudentSchool(student_school);
 				stu.setStudentPreSchool(student_preschool);
 				stu.setStudentPhone(student_tele);
-				stu.setStudentRoomId(student_roomid);
 				stu.setStudentUseTime(ut);
 				
 				boolean flag = false;

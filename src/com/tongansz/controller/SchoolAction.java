@@ -116,6 +116,7 @@ public class SchoolAction extends ActionSupport{
 		boolean flag = false;
 		
 		flag = sd.update(school);
+		sd.update(school);
 		
 		//返回结果
 		PrintWriter out = null;	
@@ -154,7 +155,8 @@ public class SchoolAction extends ActionSupport{
 		boolean flag = false;
 		
 		flag = sd.delete(school);
-		
+		if(sd.query(s_id) != null) sd.delete(school);
+		 
 		//返回结果
 		PrintWriter out = null;	
 		out = ServletActionContext.getResponse().getWriter();

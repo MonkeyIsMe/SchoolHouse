@@ -3,6 +3,9 @@
  */
 
 var mydata = [];
+var len;
+var hw_del;
+var hw_obj;
 
 function GetSchoolInfo(){
 	$.ajaxSettings.async = false;
@@ -13,6 +16,7 @@ function GetSchoolInfo(){
 			}, 
 			function(data) {
 				var data = JSON.parse(data);
+				len = data.length;
 				for (var i = 0; i < data.length; i++) {
 					//alert(mydata.length);
 					mydata.push(data[i]);
@@ -51,7 +55,6 @@ $(document).ready(function() {
 						autowidth : true,
 						shrinkToFit : true,
 						rowNum : 20,
-						rowList : [10],
 						multiselect : true,
 						celledit:true,
 						colNames : [ "序号", "学校名称", "学校地址", "所属街道", "所属学区",
@@ -62,47 +65,55 @@ $(document).ready(function() {
 							editable : false,
 							width : 60,
 							sorttype : "int",
-							search : true
+							searchoptions: {sopt:['cn']},
+							search:false,
 						}, {
 							name : "schoolName",
 							index : "schoolName",
 							editable : true,
-							width : 90
+							width : 90,
+							searchoptions: {sopt:['cn']},
 						}, {
 							name : "schoolAddress",
 							index : "schoolAddress",
 							editable : true,
-							width : 100
+							width : 100,
+							searchoptions: {sopt:['cn']},
 						}, {
 							name : "schoolStreet",
 							index : "schoolStreet",
 							editable : true,
-							width : 100
+							width : 100,
+							searchoptions: {sopt:['cn']},
 						}, {
 							name : "areaName",
 							index : "areaName",
 							editable : true,
 							width : 80,
-							align : "left"
+							align : "left",
+							searchoptions: {sopt:['cn']},
 						}, {
 							name : "schoolIegalPerson",
 							index : "schoolIegalPerson",
 							editable : true,
 							width : 80,
 							align : "left",
-							sorttype : "float"
+							sorttype : "float",
+							searchoptions: {sopt:['cn']},
 						}, {
 							name : "schoolPhone",
 							index : "schoolPhone",
 							editable : true,
 							width : 80,
-							align : "left"
+							align : "left",
+							searchoptions: {sopt:['cn']},
 						}, {
 							name : "schoolCreatTime",
 							index : "schoolCreatTime",
 							editable : true,
 							width : 100,
-							sortable : false
+							sortable : false,
+							searchoptions: {sopt:['cn']},
 						} ],
 						pager : "#pager_list_2",
 						viewrecords : true,
@@ -118,9 +129,9 @@ $(document).ready(function() {
 				edit : false,
 				add : false,
 				del : false,
-				search : false
+				search : true
 			}, {
-				height : 400,
+				height : 200,
 				reloadAfterSubmit : true
 			});
 			$(window).bind("resize", function() {
@@ -128,8 +139,8 @@ $(document).ready(function() {
 				$("#table_list_2").setGridWidth(width)
 			})
 			
-			var hw_obj = $("#table_list_2").jqGrid("getRowData");
-			var hw_del = $("#table_list_2").jqGrid("getGridParam","selarrrow");
+			hw_obj = $("#table_list_2").jqGrid("getRowData");
+			hw_del = $("#table_list_2").jqGrid("getGridParam","selarrrow");
 			
 			$("#bt_add").click(function() {
 				$("#mySave").css("display","inline");
@@ -143,6 +154,8 @@ $(document).ready(function() {
 			});
 			
 			$("#bt_edit").click(function() {
+				hw_obj = $("#table_list_2").jqGrid("getRowData");
+				hw_del = $("#table_list_2").jqGrid("getGridParam","selarrrow");
 				//alert(hw_del.length)
 				$("#mySave").css("display","none");
 			    $("#myEdit").css("display","inline");
@@ -150,12 +163,12 @@ $(document).ready(function() {
 			    	//alert(222);sssss
 			    	
 			    	$("#bt_edit").attr("data-target","#add-edit");
-			        $("#legalPerson").val(hw_obj[hw_del[0]-1].schoolIegalPerson);
-			        $("#schoolTel").val(hw_obj[hw_del[0]-1].schoolPhone);
-			        $("#Sdid").val(hw_obj[hw_del[0]-1].areaId);
-			        $("#schoolStreet").val(hw_obj[hw_del[0]-1].schoolStreet);
-			        $("#schooladdress").val(hw_obj[hw_del[0]-1].schoolAddress);
-			        $("#schoolName").val(hw_obj[hw_del[0]-1].schoolName); 
+			        $("#legalPerson").val(hw_obj[(hw_del[0]-1)%20].schoolIegalPerson);
+			        $("#schoolTel").val(hw_obj[(hw_del[0]-1)%20].schoolPhone);
+			        $("#Sdid").val(hw_obj[(hw_del[0]-1)%20].areaId);
+			        $("#schoolStreet").val(hw_obj[(hw_del[0]-1)%20].schoolStreet);
+			        $("#schooladdress").val(hw_obj[(hw_del[0]-1)%20].schoolAddress);
+			        $("#schoolName").val(hw_obj[(hw_del[0]-1)%20].schoolName); 
 			    }else if(hw_del.length < 1){
 			        alert("请至少选择1项！");
 			        $("#bt_edit").attr("data-target","");
@@ -167,7 +180,7 @@ $(document).ready(function() {
 			
 	    	$("#myEdit").click(function(){
 	    		var op1 = $("#area option:selected");
-		        var sid = hw_obj[hw_del[0]-1].schoolId;
+		        var sid = hw_obj[(hw_del[0]-1)%20].schoolId;
 		        var update_legalPerson = $("#legalPerson").val();
 		        var update_schoolTel =$("#schoolTel").val();
 		        var update_Sdid = op1.val();
@@ -209,8 +222,14 @@ $(document).ready(function() {
 		    		});
 		    	}
 	    	}) 
+	    	
+	    	$("#bt_excel").click(function(){
+	    		window.open("add_excel_xuexiao.html");
+	    	})
 			
 		    $("#bt_del").click(function() {
+		    	hw_obj = $("#table_list_2").jqGrid("getRowData");
+		    	hw_del = $("#table_list_2").jqGrid("getGridParam","selarrrow");
 		        if(hw_del.length<1){
 			        alert("请至少选择1项！");
 			        $("#bt_edit").attr("data-target","");
@@ -226,7 +245,7 @@ $(document).ready(function() {
 				    			$.post(
 				    					"DeleteSchool.action",
 				    					{
-				    						school_id:hw_obj[hw_del[i]-1].schoolId,
+				    						school_id:hw_obj[(hw_del[i]-1)%20].schoolId,
 				    					},
 				    					function(data){
 				    						data = data.replace(/^\s*/, "").replace(/\s*$/, "");
@@ -319,3 +338,18 @@ function SaveSchool(){
 
 
 
+function myrefresh(){
+	$.ajaxSettings.async = false;
+	$.post(
+			"QueryAllSchool.action",
+			{
+				
+			}, 
+			function(data) {
+				var data = JSON.parse(data);
+				if(data.length != len){
+					window.location.replace("hw_table_school.html");
+				}
+	});
+}
+setInterval(myrefresh,1000); //指定1秒刷新一次

@@ -65,6 +65,78 @@ public class DealDate {
 		return time;
 	}
 	
+	public boolean JudgeDate(String Date) {
+		boolean flag = true;
+		//System.out.println(Date);
+		if(Date.length() == 0) return false;
+		
+		for(int i = 0; i < Date.length(); i ++) {
+			char str = Date.charAt(i);
+			if(str >= '0' && str <= '9') continue;
+			else {
+				flag = false;
+				break;
+			}
+		}
+		return flag;
+	}
+	
+	public String GetTrueDate(String Date) {
+		
+		String date = "";
+		
+		int FirstWord = 0;
+		int SecondWord = 0;
+		
+		String FirstDate = "";
+		String SecondDate = "";
+		
+		date =  Date.substring(0, 4);
+		
+		for(int i = 4; i < Date.length(); i ++) {
+			char str = Date.charAt(i);
+			if(str >= '0' && str <= '9') continue;
+			else {
+				FirstWord = i;
+				break;
+			}
+		}
+
+		for(int i = FirstWord+1; i < Date.length(); i ++) {
+			char str = Date.charAt(i);
+			if(str >= '0' && str <= '9') continue;
+			else {
+				SecondWord = i;
+				break;
+			}
+		}
+		
+		for(int i = FirstWord+1 ;i < SecondWord; i++) {
+			char str = Date.charAt(i);
+			FirstDate = FirstDate + str;
+		}
+		
+		if(FirstDate.length() <= 1) {
+			FirstDate = "0"+ FirstDate;
+		}
+		
+		for(int i = SecondWord+1 ;i < Date.length(); i++) {
+			char str = Date.charAt(i);
+			if(str >= '0' && str <= '9') {
+				SecondDate = SecondDate + str;
+			}
+		}
+		
+		if(SecondDate.length() <= 1) {
+			SecondDate = "0"+ SecondDate;
+		}
+		
+		date = date + FirstDate;
+		date = date + SecondDate;
+		//System.out.println(" FirstWord = " + FirstWord +" SecondWord = " +SecondWord + " FirstDate = " + FirstDate +" SecondDate = " +SecondDate);
+		return date;
+	}
+	
 }
 
 //0123456789ABCDEFGHI

@@ -33,12 +33,14 @@
 <property name="hibernate.connection.url">jdbc:mysql:///schoolhouse?autoReconnect=true&amp;autoReconnectForPools=true&amp;characterEncoding=UTF-8
 </property>
 <property name="hibernate.connection.username">root</property>
-<property name="hibernate.connection.password">Huyutong123</property>
+<property name="hibernate.connection.password">421992850</property>
 <property name="current_session_context_class">thread</property>	
 <property name="connection.autoReconnect">true</property> 
 <property name="connection.autoReconnectForPools">true</property> 
 <property name="connection.is-connection-validation-required">true</property> 
-<property name="hibernate.jdbc.batch_size">50</property> 
+
+<property name="hiberante.cache.use_second_level_cache">false</property>
+<property name="hibernate.jdbc.batch_size">2</property> 
 <!-- <property name="show_sql">true</property> -->
 
 		

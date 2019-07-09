@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+
+<style type="text/css">
+
+</style>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>student_info</title>
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+
+    <!-- jqgrid-->
+    <link href="css/plugins/jqgrid/ui.jqgridffe4.css?0820" rel="stylesheet">
+
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+
+    <link href="css/patch.css" rel="stylesheet">
+    <style>
+        /* Additional style to fix warning dialog position */
+
+        #alertmod_table_list_2 {
+            top: 200px !important;
+            margin: 0px auto;
+            cursor: default;
+        }
+        .ui-jqdialog{
+            margin: 0px auto;
+        }
+    </style>
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content  animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox ">
+                    <div class="ibox-header">
+                         <h2 class="m-t">申请验证的学生信息</h2>                      
+                    </div>
+                    <div class="ibox-content">
+                        <div class="button-opt col-sm-3">
+<!--                             <button type="button" id="bt_add" class="btn btn-primary mybutton" data-toggle="modal" data-target="">
+                              添加
+                            </button>                        
+                            <button type="button" id="bt_edit" class="btn btn-primary mybutton" data-toggle="modal" data-target="">
+                              修改
+                            </button>
+                            <button type="button" id="bt_del" class="btn btn-primary mybutton" data-toggle="modal" data-target="">
+                              删除
+                            </button>
+                            <button type="button" id="bt_excel" class="btn btn-primary mybutton" data-toggle="modal" data-target="">
+                              导入excel
+                            </button> -->
+<!--                             <button type="button" id="bt_valid" class="btn btn-primary mybutton" data-toggle="modal" data-target="">
+                              验证
+                            </button> -->
+<!--                             <button type="button" id="bt_excel" class="btn btn-success mybutton" data-toggle="modal" data-target="">
+                              导入Excel
+                            </button> -->
+                        </div>
+<!--                         <div class="input-group search-input col-sm-6">
+                            <input type="text" class="form-control"> 
+                            <span class="input-group-btn"> 
+                                <button type="button" class="btn btn-primary">搜索</button> 
+                                
+                            </span>
+                        </div>  -->
+                        <div class="jqGrid_wrapper col-sm-12">
+                            <table id="table_list_2"></table>
+                            <div id="pager_list_2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<div class="add-edit-modal">
+    <div class="modal fade mymodal" id="add-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">添加数据</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group draggable ui-draggable">
+                <div class="div-0">
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">学生姓名：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="studentName" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">学生身份证号吗：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="identityId" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="div-0">
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">父亲姓名：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="farther" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">母亲姓名：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="mother" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="div-0">
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">业主姓名：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="houseOwner" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">业主身份证：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="houseOwnerId" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="div-0">
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">与业主关系：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="relation" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">房产证号：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="houseCard" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="div-0">
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">房屋预告登记号：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="housepreCard" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">所属楼盘：</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="studentbuildId" name=""  placeholder="请输入文本">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="div-0">
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">楼号：</label>
+                            <div class="col-sm-9">
+                                <select  id="studentbuildNum" name="" class="form-control" placeholder="请输入文本">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">房号：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="studenthomeId" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--                 <div class="div-0">
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">是否有效：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="isvalid" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div> -->
+<!--                     <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">所属学校：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="studentSchool" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="div-0">
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">学生联系电话：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="studentTel" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">使用的日期：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="useTime" name="" class="form-control" placeholder="格式为2005-01-01">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="div-0">
+                    <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable">毕业小学：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="privateSchool" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div>
+<!--                     <div class="col-md-6 div-1">
+                        <div class="form-group div-2">
+                            <label class="col-sm-3 control-label modal-lable" >创建时间：</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="createTime" name="" class="form-control" placeholder="请输入文本">
+                            </div>
+                        </div>
+                    </div> -->
+                    
+                </div>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary" id="mySave">保存</button>
+             <button type="button" class="btn btn-primary" id="myEdit">修改</button>
+<!--             <button type="button" class="btn btn-primary" id="myValid">验证</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="del-modal">
+    <div class="modal fade mymodal" id="mydel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog del-modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">是否删除</h4>
+          </div>
+          <!-- <div class="modal-body"> -->
+<!--             <div class="form-group draggable ui-draggable">
+              
+            </div> -->
+          <div class="modal-footer">
+            <div class="del-check">
+                <button type="button" class="btn btn-default del-cancel" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="myDelete">删除</button>
+            </div>
+          </div>
+        <!-- </div> -->
+      </div>
+    </div>
+</div>
+
+<div class="more-modal">
+    <div class="modal fade mymodal" id="mymore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog del-modal-dialog" role="document">
+        <div class="modal-content alert-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h3 class="modal-title" id="myModalLabel">此网页提示</h4>
+          </div>
+                <h2 class="myalert">请至多选择1项！</h2>
+          <div class="modal-footer">
+            <div class="alert-check">
+                <button type="button" class="btn btn-default alert-cancel" data-dismiss="modal">确定</button>
+                
+            </div>
+          </div>
+        <!-- </div> -->
+      </div>
+    </div>
+</div>
+
+<div class="less-modal">
+    <div class="modal fade mymodal" id="myless" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog del-modal-dialog" role="document">
+        <div class="modal-content alert-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h3 class="modal-title" id="myModalLabel">此网页提示</h3>
+          </div>    
+                <h2 class="myalert">请至少选择1项！</h2>
+          <div class="modal-footer">
+            <div class="alert-check">
+                <button type="button" class="btn btn-default alert-cancel" data-dismiss="modal">确定</button>
+                
+            </div>
+          </div>
+        <!-- </div> -->
+      </div>
+    </div>
+</div>
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="js/plugins/peity/jquery.peity.min.js"></script>
+    <script src="js/plugins/jqgrid/i18n/grid.locale-cnffe4.js?0820"></script>
+    <script src="js/plugins/jqgrid/jquery.jqGrid.minffe4.js?0820"></script>
+    <script src="js/content.min.js?v=1.0.0"></script>
+    <script src="js/See_in_student_all.js"></script>
+</body>
+
+
+</html>

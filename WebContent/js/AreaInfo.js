@@ -3,6 +3,9 @@
  */
 
 var mydata = [];
+var obj_edit;
+var obj_del;
+var len;
 
 function GetAreaInfo(){
 	$.ajaxSettings.async = false;
@@ -12,14 +15,17 @@ function GetAreaInfo(){
 				
 			}, 
 			function(data) {
+				
 				var data = JSON.parse(data);
+				len = data.length;
+				//alert(len);
 				for (var i = 0; i < data.length; i++) {
 					//alert(mydata.length);
 					mydata.push(data[i]);
 		}
 	});
 }
-
+var obj_edit
 $(document).ready(function() {
 	GetAreaInfo()
 	$.jgrid.defaults.styleUI = "Bootstrap";
@@ -32,24 +38,28 @@ $(document).ready(function() {
 		rowNum : 20,
 		rowList : [ 10, 20, 30 ],
 		multiselect : true,
-		colNames : [ "序号", "学区名称", "创建时间" ],
+		colNames : [ "学区编号", "学区名称", "创建时间" ],
 		colModel : [ {
 			name : "areaId",
 			index : "areaId",
 			editable : true,
 			width : 60,
 			sorttype : "int",
-			search : true
+			search : false,
+			searchoptions: {sopt:['cn']},
 		}, {
 			name : "areaName",
 			index : "areaName",
 			editable : true,
-			width : 90
+			width : 90,
+			searchoptions: {sopt:['cn']},
 		}, {
 			name : "areaCreatTime",
 			index : "areaCreatTime",
 			editable : true,
-			width : 100
+			width : 100,
+			search : false,
+			searchoptions: {sopt:['cn']},
 		} ],
 		pager : "#pager_list_2",
 		viewrecords : true,
@@ -61,10 +71,10 @@ $(document).ready(function() {
 	});
 	$("#table_list_2").setSelection(0, true);
 	$("#table_list_2").jqGrid("navGrid", "#pager_list_2", {
-		edit : true,
-		add : true,
-		del : true,
-		search : false
+		edit : false,
+		add : false,
+		del : false,
+		search : true
 	}, {
 		height : 400,
 		reloadAfterSubmit : true
@@ -74,8 +84,7 @@ $(document).ready(function() {
 		$("#table_list_2").setGridWidth(width)
 	})
 	
-    var obj_edit = $("#table_list_2").jqGrid("getRowData");//获取修改时多选的id，并放入到数组obj_edit中
-    var obj_del;//获取到删除时多选的id，并放入到数组obj_del中
+    obj_edit = $("#table_list_2").jqGrid("getRowData");//获取修改时多选的id，并放入到数组obj_edit中
     
     $("#bt_add").click(function() {
         $("#mySave").css("display","inline");
@@ -131,13 +140,14 @@ $(document).ready(function() {
     })
     
     $("#bt_edit").click(function() {
+    	obj_edit = $("#table_list_2").jqGrid("getRowData");
     	obj_del = $("#table_list_2").jqGrid("getGridParam","selarrrow");
         $("#mySave").css("display","none");
         $("#myEdit").css("display","inline");
         if(obj_del.length==1){
             // alert(obj_edit[obj_del[0]-1].schoolName);
             $("#bt_edit").attr("data-target","#add-edit");
-            $("#SDName").val(obj_edit[obj_del[0]-1].areaName)
+            $("#SDName").val(obj_edit[(obj_del[0]-1)%20].areaName);
             
         }else if(obj_del.length < 1){
             alert("请至少选择1项！");
@@ -149,7 +159,7 @@ $(document).ready(function() {
     });
     
     $("#myEdit").click(function(){
-    	var aid = obj_edit[obj_del[0]-1].areaId;
+    	var aid = obj_edit[(obj_del[0]-1)%20].areaId;
         var AreaName = $("#SDName").val();
     	if(AreaName == null || AreaName == ""){
     		alert("所填均为非空!");
@@ -183,7 +193,13 @@ $(document).ready(function() {
     	}
     })
     
+    $("#bt_excel").click(function(){
+    	//alert(1111);
+    	window.open("add_excel_xuequ.html");
+    })
+    
     $("#bt_del").click(function() {
+    	var ob = $("#table_list_2").jqGrid("getRowData");
     	obj_del = $("#table_list_2").jqGrid("getGridParam","selarrrow");
         if(obj_del.length<1){
 			alert("请至少选择1项！");
@@ -200,7 +216,7 @@ $(document).ready(function() {
 		    			$.post(
 		    					"DeleteArea.action",
 		    					{
-		    						area_id:obj_edit[obj_del[i]-1].areaId
+		    						area_id:ob[(obj_del[i]-1)%20].areaId
 		    					},
 		    					function(data){
 		    						data = data.replace(/^\s*/, "").replace(/\s*$/, "");
@@ -224,3 +240,21 @@ $(document).ready(function() {
         
     }); 
 });
+
+function myrefresh(){
+	$.ajaxSettings.async = false;
+	$.post(
+			"QueryAllArea.action",
+			{
+				
+			}, 
+			function(data) {
+				var data = JSON.parse(data);
+				//alert(len + "    " + data.length +" " + (len == data.length))
+				if(data.length != len){
+					window.location.replace("hw_table_school_district.html");
+				}
+	});
+}
+
+setInterval(myrefresh,2000); //指定1秒刷新一次

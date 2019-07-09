@@ -183,6 +183,7 @@ public class LoginAction extends ActionSupport{
 		
 		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
 		HttpServletRequest request= ServletActionContext.getRequest();
+		request.getSession().invalidate();//清除 session 中的所有信息
 		
 		UserDAO ud = new UserDAOImpl();
 		List<User> list = ud.QueryByAccount(account);
@@ -201,6 +202,7 @@ public class LoginAction extends ActionSupport{
 		
 		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
 		HttpServletRequest request= ServletActionContext.getRequest();
+		
 		
 		String username = (String)request.getSession().getAttribute("username");
 		int userflag = (int)request.getSession().getAttribute("userflag");
@@ -232,6 +234,7 @@ public class LoginAction extends ActionSupport{
 		
 		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
 		HttpServletRequest request= ServletActionContext.getRequest();
+		request.getSession().invalidate();//清除 session 中的所有信息
 		
 		SchoolUserDAO ud = new SchoolUserDAOImpl();
 		List<SchoolUser> list = ud.QueryByAccount(account);
@@ -251,7 +254,7 @@ public class LoginAction extends ActionSupport{
 		
 		ServletActionContext.getResponse().setContentType("text/html; charset=utf-8");
 		HttpServletRequest request= ServletActionContext.getRequest();
-		
+		System.out.println(request.getSession().getAttribute("susername"));
 		String username = (String)request.getSession().getAttribute("susername");
 		int userflag = (int)request.getSession().getAttribute("suserflag");
 		int schoolid = (int)request.getSession().getAttribute("sschoolid");
@@ -260,7 +263,7 @@ public class LoginAction extends ActionSupport{
 		String userlogintime = (String)request.getSession().getAttribute("suserlogintime");
 		int userid = (int)request.getSession().getAttribute("suserid");
 		String password = (String)request.getSession().getAttribute("spassword");
-		//System.out.println(userid);
+		//System.out.println(password);
 		PrintWriter out = null;
 		JSONObject  jo = new JSONObject();
 		jo.put("username", username);

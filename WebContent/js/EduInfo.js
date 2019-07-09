@@ -37,7 +37,7 @@ function logout(){
 				
 			}, 
 			function(data) {
-				window.location.replace("welcome.html");
+				window.location.replace("login_edu.html");
 		}
 	);
 }

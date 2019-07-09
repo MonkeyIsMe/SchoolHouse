@@ -7,6 +7,10 @@ var SchoolName;
 var schoolid;
 var areaid;
 
+
+var obj_edit;
+var obj_del;
+
 $(function(){
 	$.ajaxSettings.async = false;
 	$.post(
@@ -53,7 +57,7 @@ $(function(){
 			);
 	
 	
-	$.post(
+/*	$.post(
 			"QueryHouseByBuildingId.action",
 			{
 				area_id:areaid,
@@ -66,7 +70,7 @@ $(function(){
 					$("#studentbuildNum").append("<option value="+ data[i].houseName +">"+ data[i].houseName+"</option>");
 				}
 			}
-			);
+			);*/
 	
 });
 
@@ -96,31 +100,32 @@ $(document).ready(function() {
         autowidth: true,
         shrinkToFit: true,
         rowNum: 20,
-        rowList: [10, 20, 30],
         multiselect: true,
         celledit: true,
         editurl:"",
         colNames: ["序号", "学生姓名", "学生身份证号", "父亲姓名", 
         	"母亲姓名", "业主姓名", "业主身份证号", "与业主关系", 
-        	"房产证号", "房屋预告登记号", "所属楼盘", "楼号", "房号",  "所属学校", "学生联系电话", "毕业小学", "使用日期"],
+        	"房产证号", "房屋预告登记号", "所属楼盘", "地址","所属学校", "学生联系电话", "毕业小学", "使用日期"],
         colModel: [{
             name: "studentId",
             index: "studentId",
             editable: true,
             width: 15,
             sorttype: "int",
-            search: true
+            search:false,
         },
         {
             name: "studentName",
             index: "studentName",
             editable: true,
+            search:false,
             width: 25
         },
         {
             name: "studentIdCard",
             index: "studentIdCard",
             editable: true,
+            search:false,
             width: 50
         },
         {
@@ -128,6 +133,7 @@ $(document).ready(function() {
             index: "studentFather",
             editable: true,
             width: 25,
+            search:false,
             align: "left"
         },
         {
@@ -135,6 +141,7 @@ $(document).ready(function() {
             index: "studentMother",
             editable: true,
             width: 25,
+            search:false,
             align: "left"
         },
         {
@@ -142,6 +149,7 @@ $(document).ready(function() {
             index: "studentHouseOwner",
             editable: true,
             width: 30,
+            search:false,
             align: "left"
         },
         {
@@ -149,6 +157,7 @@ $(document).ready(function() {
             index: "studentOwnerId",
             editable: true,
             width: 50,
+            search:false,
             sortable: false
         },
         {
@@ -156,6 +165,7 @@ $(document).ready(function() {
             index: "studentRelation",
             editable: true,
             width: 30,
+            search:false,
             align: "left"
         },
         {
@@ -163,6 +173,7 @@ $(document).ready(function() {
             index: "studentHouseCard",
             editable: true,
             width: 30,
+            search:false,
             align: "left"
         },
         {
@@ -170,12 +181,14 @@ $(document).ready(function() {
             index: "studentHousePreCard",
             editable: true,
             width: 40,
+            search:false,
             align: "left"
         },
         {
             name: "studentBuildingId",
             index: "studentBuildingId",
             editable: true,
+            search:false,
             width: 30,
             align: "left"
         },
@@ -183,13 +196,7 @@ $(document).ready(function() {
             name: "studentHouseNumber",
             index: "studentHouseNumber",
             editable: true,
-            width: 20,
-            align: "left"
-        },
-        {
-            name: "studentRoomId",
-            index: "studentRoomId",
-            editable: true,
+            searchoptions: {sopt:['cn']},
             width: 20,
             align: "left"
         },
@@ -197,6 +204,7 @@ $(document).ready(function() {
             name: "studentSchool",
             index: "studentSchool",
             editable: true,
+            search:false,
             width: 30,
             align: "left"
         },
@@ -204,6 +212,7 @@ $(document).ready(function() {
             name: "studentPhone",
             index: "studentPhone",
             editable: true,
+            search:false,
             width: 40,
             align: "left"
         },
@@ -211,6 +220,7 @@ $(document).ready(function() {
             name: "studentPreSchool",
             index: "studentPreSchool",
             editable: true,
+            search:false,
             width: 30,
             align: "left"
         },
@@ -218,6 +228,7 @@ $(document).ready(function() {
             name: "studentUseTime",
             index: "studentUseTime",
             editable: true,
+            search:false,
             width: 30,
             align: "left"
         }],
@@ -250,19 +261,33 @@ $(document).ready(function() {
     	window.open("add_validExcel.html");
     })
     
-    var obj_edit = $("#table_list_2").jqGrid("getRowData");//获取修改时多选的id，并放入到数组obj_edit中
-    var obj_del;//获取到删除时多选的id，并放入到数组obj_del中
+    obj_edit = $("#table_list_2").jqGrid("getRowData");//获取修改时多选的id，并放入到数组obj_edit中
     //var hw_del = $("#table_list_2").jqGrid("getRowData",obj_del[0]);
     $("#bt_add").click(function() {
         $("#myEdit").css("display","none");
         $("#mySave").css("display","inline");
         $("#bt_add").attr("data-target","#add-edit");
+    	$("#studentName").val("");
+    	$("#identityId").val("");
+    	$("#farther").val("");
+    	$("#mother").val("");
+    	$("#houseOwner").val("");
+    	$("#houseOwnerId").val("");
+    	$("#relation").val("");
+    	$("#houseCard").val("");
+    	$("#housepreCard").val("");
+    	$("#studentbuildId").val("");
+    	$("#studentbuildNum").val("");
+    	$("#studentSchool").val("");
+    	$("#studentTel").val("");
+    	$("#privateSchool").val("");
+    	$("#useTime").val("");
     });
     
     $("#mySave").click(function(){
     	//alert(1111);
     	var op1 = $("#studentbuildId option:selected");
-    	var op2 = $("#studentbuildNum option:selected");
+    	var studentbuildNum = $("#studentbuildNum").val();
     	var studentName = $("#studentName").val();
     	var identityId = $("#identityId").val();
     	var farther = $("#farther").val();
@@ -273,8 +298,6 @@ $(document).ready(function() {
     	var houseCard = $("#houseCard").val();
     	var housepreCard = $("#housepreCard").val();
     	var studentbuildId = op1.val();
-    	var studentbuildNum = op2.val();
-    	var studenthomeId = $("#studenthomeId").val();
     	var studentTel = $("#studentTel").val();
     	var privateSchool = $("#privateSchool").val();
     	var useTime = $("#useTime").val();
@@ -283,13 +306,12 @@ $(document).ready(function() {
     	var DateFlag = IsDate(useTime);
     	var IDFlag = IsCard(identityId);
     	
-    	if(studentName == "" || studentName == null || identityId == null || identityId =="" || farther == null || farther == "" || mother == "" || mother ==null
-    		||	houseOwner == "" || houseOwner == null || 	houseOwnerId == null || houseOwnerId =="" || relation == null || relation =="" || houseCard == null ||
-    		houseCard == "" || housepreCard == null || housepreCard =="" || studentbuildId == null || studentbuildId == "" || studentbuildNum == "" || studentbuildNum == null
-    		|| studenthomeId == null || studenthomeId == "" || studentTel == null || 
-    		studentTel =="" ||  useTime == null || useTime == ""
+    	if(studentName == "" || studentName == null || identityId == null || identityId =="" || houseOwner == "" 
+    		|| houseOwner == null || 	houseOwnerId == null || houseOwnerId =="" || relation == null || 
+    		relation =="" || studentbuildNum == "" || studentbuildNum == null||  
+    		useTime == null || useTime == ""
     	){
-    		alert("所有选项非空！");
+    		alert("所有必填选项非空！");
     	}
     	else if(DateFlag == 0 || useTime.length != 10){
     		alert("日期格式错误!!");
@@ -315,7 +337,6 @@ $(document).ready(function() {
     					student_school:SchoolName,
     					student_tele:studentTel,
     					student_preschool:privateSchool,
-    					student_roomid:studenthomeId,
     					usetime:useTime,
     				}, 
     				function(data) {
@@ -333,6 +354,7 @@ $(document).ready(function() {
     })
     
     $("#bt_edit").click(function() {
+    	obj_edit = $("#table_list_2").jqGrid("getRowData");//获取修改时多选的id，并放入到数组obj_edit中
         obj_del = $("#table_list_2").jqGrid("getGridParam","selarrrow");
         $("#mySave").css("display","none");
         $("#myEdit").css("display","inline");
@@ -340,27 +362,28 @@ $(document).ready(function() {
             //alert(obj_edit[obj_del[0]-1].id);
             $("#bt_edit").attr("data-target","#add-edit");
             
-        	$("#studentName").val(obj_edit[obj_del[0]-1].studentName);
-        	$("#identityId").val(obj_edit[obj_del[0]-1].studentIdCard);
-        	$("#farther").val(obj_edit[obj_del[0]-1].studentFather);
-        	$("#mother").val(obj_edit[obj_del[0]-1].studentMother);
-        	$("#houseOwner").val(obj_edit[obj_del[0]-1].studentHouseOwner);
-        	$("#houseOwnerId").val(obj_edit[obj_del[0]-1].studentOwnerId);
-        	$("#relation").val(obj_edit[obj_del[0]-1].studentRelation);
-        	$("#houseCard").val(obj_edit[obj_del[0]-1].studentHouseCard);
-        	$("#housepreCard").val(obj_edit[obj_del[0]-1].studentHousePreCard);
-        	$("#studentbuildId").val(obj_edit[obj_del[0]-1].studentBuildingId);
-        	$("#studentbuildNum").val(obj_edit[obj_del[0]-1].studentHouseNumber);
-        	$("#studenthomeId").val(obj_edit[obj_del[0]-1].studentRoomId);
-        	$("#studentSchool").val(obj_edit[obj_del[0]-1].studentSchool);
-        	$("#studentTel").val(obj_edit[obj_del[0]-1].studentPhone);
-        	$("#privateSchool").val(obj_edit[obj_del[0]-1].studentPreSchool);
-        	var str = obj_edit[obj_del[0]-1].studentUseTime;
+        	$("#studentName").val(obj_edit[(obj_del[0]-1)%20].studentName);
+        	$("#identityId").val(obj_edit[(obj_del[0]-1)%20].studentIdCard);
+        	$("#farther").val(obj_edit[(obj_del[0]-1)%20].studentFather);
+        	$("#mother").val(obj_edit[(obj_del[0]-1)%20].studentMother);
+        	$("#houseOwner").val(obj_edit[(obj_del[0]-1)%20].studentHouseOwner);
+        	$("#houseOwnerId").val(obj_edit[(obj_del[0]-1)%20].studentOwnerId);
+        	$("#relation").val(obj_edit[(obj_del[0]-1)%20].studentRelation);
+        	$("#houseCard").val(obj_edit[(obj_del[0]-1)%20].studentHouseCard);
+        	$("#housepreCard").val(obj_edit[(obj_del[0]-1)%20].studentHousePreCard);
+        	$("#studentbuildId").val(obj_edit[(obj_del[0]-1)%20].studentBuildingId);
+        	$("#studentbuildNum").val(obj_edit[(obj_del[0]-1)%20].studentHouseNumber);
+        	
+        	$("#studentSchool").val(obj_edit[(obj_del[0]-1)%20].studentSchool);
+        	$("#studentTel").val(obj_edit[(obj_del[0]-1)%20].studentPhone);
+        	$("#privateSchool").val(obj_edit[(obj_del[0]-1)%20].studentPreSchool);
+        	var str = obj_edit[(obj_del[0]-1)%20].studentUseTime;
         	var time = str.slice(0,4);
         	time = time + "-";
         	time = time + str.slice(4,6);
         	time = time + "-";
-        	time = time + str.slice(6,8)
+        	time = time + str.slice(6,8);
+        	$("#useTime").val(time);
         }else if(obj_del.length < 1){
             $("#bt_edit").attr("data-target","");
             $("#myless").modal("show");
@@ -373,8 +396,8 @@ $(document).ready(function() {
 	//编辑
 	$("#myEdit").click(function(){
     	var op1 = $("#studentbuildId option:selected");
-    	var op2 = $("#studentbuildNum option:selected");
-		var sid = obj_edit[obj_del[0]-1].studentId;
+    	var studentbuildNum = $("#studentbuildNum").val();
+		var sid = obj_edit[(obj_del[0]-1)%20].studentId;
 		var studentName = $("#studentName").val();
     	var identityId = $("#identityId").val();
     	var farther = $("#farther").val();
@@ -385,8 +408,6 @@ $(document).ready(function() {
     	var houseCard = $("#houseCard").val();
     	var housepreCard = $("#housepreCard").val();
     	var studentbuildId = op1.val();
-    	var studentbuildNum = op2.val();
-    	var studenthomeId = $("#studenthomeId").val();
     	var studentTel = $("#studentTel").val();
     	var privateSchool = $("#privateSchool").val();
     	var useTime = $("#useTime").val();
@@ -395,10 +416,9 @@ $(document).ready(function() {
     	var IDFlag = IsCard(identityId);
     	var IDOwnerFlag = IsCard(houseOwnerId);
     	
-    	if(studentName == "" || studentName == null || identityId == null || identityId =="" || farther == null || farther == "" || mother == "" || mother ==null
-        		||	houseOwner == "" || houseOwner == null || 	houseOwnerId == null || houseOwnerId =="" || relation == null || relation =="" || houseCard == null ||
-        		houseCard == "" || housepreCard == null || housepreCard =="" || studentbuildId == null || studentbuildId == "" || studentbuildNum == "" || studentbuildNum == null
-        		|| studenthomeId == null || studenthomeId == "" ||   studentTel == null || studentTel =="" || useTime == null || useTime == ""
+    	if(studentName == "" || studentName == null || identityId == null || identityId =="" 
+        		||	houseOwner == "" || houseOwner == null || 	houseOwnerId == null || houseOwnerId =="" 
+        			|| relation == null || relation =="" ||  studentbuildNum == "" || studentbuildNum == null || useTime == null || useTime == ""
         	){
         		alert("所有选项非空！");
         	}
@@ -428,7 +448,6 @@ $(document).ready(function() {
     					student_school:SchoolName,
     					student_tele:studentTel,
     					student_preschool:privateSchool,
-    					student_roomid:studenthomeId,
     					usetime:useTime,
     				}, 
     				function(data) {
@@ -446,6 +465,7 @@ $(document).ready(function() {
 	})
     
     $("#bt_del").click(function() {
+    	obj_edit = $("#table_list_2").jqGrid("getRowData");//获取修改时多选的id，并放入到数组obj_edit中
         obj_del = $("#table_list_2").jqGrid("getGridParam","selarrrow");
         if(obj_del.length<1){
             $("#myless").modal("show");
@@ -463,7 +483,7 @@ $(document).ready(function() {
 		    			$.post(
 		    					"DeleteTempStudent.action",
 		    					{
-		    						student_id:obj_edit[obj_del[i]-1].studentId,
+		    						student_id:obj_edit[(obj_del[i]-1)%20].studentId,
 		    					},
 		    					function(data){
 		    						data = data.replace(/^\s*/, "").replace(/\s*$/, "");
@@ -484,6 +504,52 @@ $(document).ready(function() {
 
             	}
 	    		alert("删除成功：" +success + "项，删除失败：" + fail + "项" );
+		        window.location.replace("hw_table_student_valid.html");
+            })
+        }
+        
+    }); 
+	
+    $("#bt_save").click(function() {
+    	obj_edit = $("#table_list_2").jqGrid("getRowData");//获取修改时多选的id，并放入到数组obj_edit中
+        obj_del = $("#table_list_2").jqGrid("getGridParam","selarrrow");
+        if(obj_del.length<1){
+            $("#mysavestu").modal("show");
+            $("#bt_save").attr("data-target","");
+        }else{
+            
+            //alert(obj_edit[obj_del[0]-1].id);//obj_edit[obj_del[0]-1].idobj_edit[obj_del[0]-1].id即为所在行的id
+            
+            $("#bt_save").attr("data-target","#SaveStudent");
+            var success = 0;
+            var fail = 0;
+            $("#mySaveStu").click(function(){
+            	for(var i = 0 ; i< obj_del.length ; i++){
+		    		$(function(){
+		    			$.post(
+		    					"SaveStudent.action",
+		    					{
+		    						student_id:obj_edit[(obj_del[i]-1)%20].studentId,
+		    					},
+		    					function(data){
+		    						data = data.replace(/^\s*/, "").replace(/\s*$/, "");
+		    						if(data == "Success"){
+/*				    							alert("删除成功 ！！");
+		    							window.location.replace("hw_table_school.html");*/
+		    							success++;
+		    						}
+		    						else{
+		    							fail++;
+/*				    							alert("删除失败 ！！");
+		    							window.location.replace("hw_table_school.html");*/
+		    						}
+		    					}
+		    					);
+		    			
+		    		});
+
+            	}
+	    		alert("保存成功：" +success + "项，保存失败：" + fail + "项" );
 		        window.location.replace("hw_table_student_valid.html");
             })
         }

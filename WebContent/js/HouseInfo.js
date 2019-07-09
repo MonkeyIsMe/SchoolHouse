@@ -7,7 +7,8 @@ var mydata = [];
 var areaid;
 var SchoolName;
 var schoolid;
-
+var obj_edit;
+var obj_del;
 $(function(){
 	$.ajaxSettings.async = false;
 	$.post(
@@ -43,9 +44,9 @@ $(function(){
 function GetBuildingInfo(){
 	$.ajaxSettings.async = false;
 	$.post(
-			"QueryBuildingBySchoolIdFlag.action",
+			"QueryBuildingByAreaId.action",
 			{
-				school_id:schoolid
+				area_id:areaid
 			}, 
 			function(data) {
 				var data = JSON.parse(data);
@@ -84,42 +85,37 @@ $(document).ready(function() {
         autowidth: true,
         shrinkToFit: true,
         rowNum: 20,
-        rowList: [10, 20, 30],
         multiselect: true,
         celledit:true,
         editurl: "hw_index_1.html",
-        colNames: ["序号", "所属楼盘名称", "栋数", "房号", "创建时间"],
+        colNames: ["序号", "所属楼盘名称", "地址", "创建时间"],
         colModel: [{
             name: "houseId",
             index: "houseId",
             editable: true,
             width: 60,
             sorttype: "int",
-            search: true
+            search:false,
         },
         {
             name: "buildingName",
             index: "buildingName",
             editable: true,
+            searchoptions: {sopt:['cn']},
             width: 90
         },
         {
             name: "houseName",
             index: "houseName",
             editable: true,
+            searchoptions: {sopt:['cn']},
             width: 100
-        },
-        {
-            name: "houseRoom",
-            index: "houseRoom",
-            editable: true,
-            width: 80,
-            align: "left"
         },
         {
             name: "houseCreateTime",
             index: "houseCreateTime",
             editable: true,
+            search:false,
             width: 100,
             sortable: false
         }],
@@ -136,7 +132,7 @@ $(document).ready(function() {
         edit: false,
         add: false,
         del: false,
-        search: false
+        search: true
     },
     {
         height: 400,
@@ -148,8 +144,7 @@ $(document).ready(function() {
         $("#table_list_2").setGridWidth(width)
     });
   
-    var obj_edit = $("#table_list_2").jqGrid("getRowData");//获取修改时多选的id，并放入到数组obj_edit中
-    var obj_del;//获取到删除时多选的id，并放入到数组obj_del中
+    obj_edit = $("#table_list_2").jqGrid("getRowData");//获取修改时多选的id，并放入到数组obj_edit中
     $("#bt_add").click(function() {
         $("#mySave").css("display","inline");
         $("#myEdit").css("display","none");
@@ -162,7 +157,7 @@ $(document).ready(function() {
 		var bId = op1.val();
         var buildNum = $("#buildNum").val();
         var houseNum = $("#houseNum").val();
-        if(houseNum == null || houseNum == "" ||  buildNum == null || buildNum =="" || bId == null || bId ==""){
+        if(buildNum == null || buildNum == ""){
         	alert("所有项均为非空!");
         }
         else{
@@ -211,6 +206,7 @@ $(document).ready(function() {
 	})
     
     $("#bt_edit").click(function() {
+    	obj_edit = $("#table_list_2").jqGrid("getRowData");//获取修改时多选的id，并放入到数组obj_edit中
         obj_del = $("#table_list_2").jqGrid("getGridParam","selarrrow");
     	$("#mySave").css("display","none");
         $("#myEdit").css("display","inline");
@@ -218,9 +214,9 @@ $(document).ready(function() {
             // alert(obj_edit[obj_del[0]-1].schoolName);
             $("#bt_edit").attr("data-target","#add-edit");
             
-            $("#bId").val(obj_edit[obj_del[0]-1].buildingId);
-            $("#buildNum").val(obj_edit[obj_del[0]-1].houseName);
-            $("#houseNum").val(obj_edit[obj_del[0]-1].houseRoom);
+            $("#bId").val(obj_edit[(obj_del[0]-1)%20].buildingId);
+            $("#buildNum").val(obj_edit[(obj_del[0]-1)%20].houseName);
+            $("#houseNum").val(obj_edit[(obj_del[0]-1)%20].houseRoom);
             
             
         }else if(obj_del.length < 1){
@@ -238,7 +234,7 @@ $(document).ready(function() {
     	var bId = op1.val();
         var buildNum = $("#buildNum").val();
         var houseNum = $("#houseNum").val();
-        var hid = obj_edit[obj_del[0]-1].houseId;
+        var hid = obj_edit[(obj_del[0]-1)%20].houseId;
         if(houseNum == null || houseNum == "" ||  buildNum == null || buildNum =="" || bId == null || bId ==""){
         	alert("所有项均为非空!");
         }
@@ -270,6 +266,7 @@ $(document).ready(function() {
     })
     
     $("#bt_del").click(function() {
+    	obj_edit = $("#table_list_2").jqGrid("getRowData");//获取修改时多选的id，并放入到数组obj_edit中
         obj_del = $("#table_list_2").jqGrid("getGridParam","selarrrow");
         if(obj_del.length<1){
             $("#bt_del").attr("data-target","");
@@ -285,7 +282,7 @@ $(document).ready(function() {
     			$.post(
     					"DeteleHouse.action",
     					{
-    						house_id:obj_edit[obj_del[i]-1].houseId,
+    						house_id:obj_edit[(obj_del[i]-1)%20].houseId,
     					},
     					function(data){
     						data = data.replace(/^\s*/, "").replace(/\s*$/, "");

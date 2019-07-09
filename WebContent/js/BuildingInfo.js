@@ -6,6 +6,9 @@ var areaid;
 var SchoolName;
 var schoolid;
 
+var obj_edit;
+var obj_del;
+
 $(function(){
 	$.ajaxSettings.async = false;
 	$.post(
@@ -68,50 +71,38 @@ $(document).ready(function() {
         autowidth: true,
         shrinkToFit: true,
         rowNum: 20,
-        rowList: [10, 20, 30],
         multiselect: true,
         celledit:true,
         editurl: "hw_index_1.html",
-        colNames: ["序号","楼盘名称", "楼盘地址", "楼盘所属街道","创建时间","审批状态"],
+        colNames: ["序号","楼盘名称", "楼盘地址", "创建时间"],
         colModel: [{
             name: "buildingId",
             index: "buildingId",
             editable: true,
             width: 60,
             sorttype: "int",
-            search: true
+            search:false,
         },
         {
             name: "buildingName",
             index: "buildingName",
             editable: true,
+            searchoptions: {sopt:['cn']},
             width: 90
         },
         {
             name: "buildingAddress",
             index: "buildingAddress",
             editable: true,
+            searchoptions: {sopt:['cn']},
             width: 100
-        },
-        {
-            name: "buildingStreet",
-            index: "buildingStreet",
-            editable: true,
-            width: 80,
-            align: "left"
         },
         {
             name: "buildingCreatTime",
             index: "buildingCreatTime",
             editable: true,
             width: 100,
-            sortable: false
-        },
-        {
-            name: "buildingHint",
-            index: "buildingHint",
-            editable: true,
-            width: 100,
+            search:false,
             sortable: false
         }
         ],
@@ -140,8 +131,7 @@ $(document).ready(function() {
         $("#table_list_2").setGridWidth(width)
     });
   
-    var obj_edit = $("#table_list_2").jqGrid("getRowData");//获取修改时多选的id，并放入到数组obj_edit中
-    var obj_del;//获取到删除时多选的id，并放入到数组obj_del中
+    obj_edit = $("#table_list_2").jqGrid("getRowData");//获取修改时多选的id，并放入到数组obj_edit中
     $("#bt_add").click(function() {
         $("#mySave").css("display","inline");
         $("#myEdit").css("display","none");
@@ -150,10 +140,10 @@ $(document).ready(function() {
     });
     
 	$("#mySave").click(function(){
-		var buildStreet = $("#buildStreet").val();
+		//var buildStreet = $("#buildStreet").val();
         var buildAddress = $("#buildAddress").val();
         var buildName = $("#buildName").val();
-        if(buildStreet == null || buildStreet == "" || buildAddress == null || buildAddress == "" || buildName == null || buildName ==""){
+        if(buildAddress == null || buildAddress == "" || buildName == null || buildName ==""){
         	alert("所有项均为非空!");
         }
         else{
@@ -171,7 +161,6 @@ $(document).ready(function() {
 								$.post(
 										"AddBuilding.action",
 										{
-											building_street:buildStreet,
 											building_address:buildAddress,
 											area_id:areaid,
 											building_name:buildName,
@@ -212,14 +201,13 @@ $(document).ready(function() {
     })
     
              $("#myEdit").click(function(){
- 
-            	var buildStreet = $("#buildStreet").val();
+            	obj_edit = $("#table_list_2").jqGrid("getRowData");//获取修改时多选的id，并放入到数组obj_edit中
     	        var buildAddress = $("#buildAddress").val();
     	        var buildName = $("#buildName").val();
     	        
-                var bid = obj_edit[obj_del[0]-1].buildingId;
+                var bid = obj_edit[(obj_del[0]-1)%20].buildingId;
                 //	alert(obj_edit[obj_del[0]-1].areaId)
-                if(buildStreet == null || buildStreet == "" || buildAddress == null || buildAddress == "" || buildName == null || buildName ==""){
+                if(buildAddress == null || buildAddress == "" || buildName == null || buildName ==""){
                 	alert("所有项均为非空!");
                 }
                 else{
@@ -235,7 +223,6 @@ $(document).ready(function() {
         		        				$.post(
         		        						"UpdateBuilding.action",
         		        						{
-        		        							building_street:buildStreet,
         		    								building_address:buildAddress,
         		    								area_id:areaid,
         		    								building_name:buildName,
@@ -268,6 +255,7 @@ $(document).ready(function() {
             })
     
     $("#bt_edit").click(function() {
+    	obj_edit = $("#table_list_2").jqGrid("getRowData");//获取修改时多选的id，并放入到数组obj_edit中
         obj_del = $("#table_list_2").jqGrid("getGridParam","selarrrow");
     	$("#mySave").css("display","none");
         $("#myEdit").css("display","inline");
@@ -275,10 +263,9 @@ $(document).ready(function() {
             // alert(obj_edit[obj_del[0]-1].schoolName);
             $("#bt_edit").attr("data-target","#add-edit");
             
-            $("#buildStreet").val(obj_edit[obj_del[0]-1].buildingStreet);
-            $("#buildAddress").val(obj_edit[obj_del[0]-1].buildingAddress);
-            $("#buildName").val(obj_edit[obj_del[0]-1].buildingName);
-            $("#SdId").val(obj_edit[obj_del[0]-1].areaId);
+            $("#buildAddress").val(obj_edit[(obj_del[0]-1)%20].buildingAddress);
+            $("#buildName").val(obj_edit[(obj_del[0]-1)%20].buildingName);
+            $("#SdId").val(obj_edit[(obj_del[0]-1)%20].areaId);
             
             
         }else if(obj_del.length < 1){
@@ -292,6 +279,7 @@ $(document).ready(function() {
     
     
     $("#bt_del").click(function() {
+    	obj_edit = $("#table_list_2").jqGrid("getRowData");//获取修改时多选的id，并放入到数组obj_edit中
         obj_del = $("#table_list_2").jqGrid("getGridParam","selarrrow");
         if(obj_del.length<1){
             $("#bt_del").attr("data-target","");
@@ -308,7 +296,7 @@ $(document).ready(function() {
     			$.post(
     					"DeleteBuilding.action",
     					{
-    						building_id:obj_edit[obj_del[i]-1].buildingId,
+    						building_id:obj_edit[(obj_del[i]-1)%20].buildingId,
     					},
     					function(data){
     						data = data.replace(/^\s*/, "").replace(/\s*$/, "");
